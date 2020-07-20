@@ -1,0 +1,23 @@
+Binary And:
+    Exclusive Or
+    And "&" Or
+ 
+Binary Exclusive Or:
+    Or
+    Exclusive Or "^" Or
+ 
+Binary Or:
+    Unary
+    Or "|" Unary
+ 
+Prefix Unary:
+    Primary
+    Unary "!" Primary
+    Unary "~" Primary   
+ 
+Primary:
+    Number
+    "("Expression")"
+ 
+Number:
+    int
