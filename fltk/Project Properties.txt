@@ -1,0 +1,39 @@
+All Configurations
+
+Configuration Properties/C/C++/General/Additional Include Directories:
+$(SolutionDir)$(Configuration)\
+C:\dev\fltk\fltk (path to fltk folder)
+
+============================
+
+Release
+
+Configuration Properties/Linker/Input/Additional Dependencies:
+fltk.lib
+wsock32.lib
+comctl32.lib
+fltk_jpeg.lib
+fltk_images.lib
+
+Linker/System/SubSystem:
+Console (/SUBSYSTEM:CONSOLE)
+
+Configuration Properties/VC++ Directories/Library Directories:
+C:\dev\fltk\fltk_build\lib\Release (path to lib/Release)
+
+============================
+
+Debug
+
+Configuration Properties/Linker/Input/Additional Dependencies:
+fltkd.lib
+wsock32.lib
+comctl32.lib
+fltk_jpegd.lib
+fltk_imagesd.lib
+
+Linker/System/SubSystem:
+Console (/SUBSYSTEM:CONSOLE)
+
+Configuration Properties/VC++ Directories/Library Directories:
+C:\dev\fltk\fltk_build\lib\Debug (path to lib/Debug)

@@ -1,0 +1,5 @@
+1. Install FLTK, add and update Bjarne Stroustrup’s header and .cpp files (Microsoft Visual Studio 2017)
+https://bumpyroadtocode.com/2017/08/29/how-to-install-and-use-fltk-1-3-4-in-visual-studio-2017-complete-guide-2-0-no-cross-contamination/
+
+2. Install FLTK (Microsoft Visual Studio 2019)
+https://www.youtube.com/watch?v=6sNKtyl4hQM
