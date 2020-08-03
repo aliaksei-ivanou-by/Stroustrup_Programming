@@ -4,24 +4,24 @@
 #endif
 
 God::God(const std::string& n, const std::string& m, const std::string& v, const std::string& w)
-	: name{ n }, 
-	mythology{ m }, 
-	vehicle{ v }, 
+	: name{ n },
+	mythology{ m },
+	vehicle{ v },
 	weapon{ w }
 {
 }
 
 std::ostream& operator<<(std::ostream& os, const God& g)
 {
-	return os << "{ " << 
-				g.name << ", " <<
-				g.mythology << ", " <<
-				g.vehicle << ", " <<
-				g.weapon << " }\n";
+	return os << "{ " <<
+		g.name << ", " <<
+		g.mythology << ", " <<
+		g.vehicle << ", " <<
+		g.weapon << " }\n";
 }
 
 Link::Link(God g, Link* s)
-	: god{ g }, 
+	: god{ g },
 	succ{ s }
 {
 }
@@ -32,20 +32,12 @@ Link* Link::insert(Link* n)
 	{
 		return this;
 	}
-	if (this == nullptr)
-	{
-		return n;
-	}
 	n->succ = this;
 	return n;
 }
 
 Link* Link::erase()
 {
-	if (this == nullptr)
-	{
-		return nullptr;
-	}
 	if (succ == nullptr)
 	{
 		return this;
@@ -92,10 +84,6 @@ const Link* Link::find(const std::string& s) const
 
 Link* Link::advance(int n) const
 {
-	if (this == nullptr)
-	{
-		return nullptr;
-	}
 	Link* p = const_cast<Link*>(this);
 	if (n > 0)
 	{

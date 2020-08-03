@@ -7,7 +7,7 @@ char* resize(char* input, int length)
 	{
 		return nullptr;
 	}
-	char* output = new char[length + 2];
+	char* output = new char[length + 1]();
 	for (int i = 0; input[i]; ++i)
 	{
 		output[i] = input[i];
@@ -25,15 +25,12 @@ try
 	char exit = '!';
 	char ch;
 	unsigned long long i = 0;
-
 	while (std::cin >> ch && ch != exit)
 	{
 		arr = resize(arr, i + 1);
 		arr[i] = ch;
-		arr[i + 1] = 0;
 		++i;
 	}
-
 	std::cout << arr << '\n';
 	delete[] arr;
 }

@@ -16,10 +16,6 @@ Link* Link::insert(Link* n)
 	{
 		return this;
 	}
-	if (this == nullptr)
-	{
-		return n;
-	}
 	n->succ = this;
 	if (prev)
 	{
@@ -36,10 +32,6 @@ Link* Link::add(Link* n)
 	{
 		return this;
 	}
-	if (this == nullptr)
-	{
-		return n;
-	}
 	succ = n;
 	n->prev = this;
 	n->succ = nullptr;
@@ -48,10 +40,6 @@ Link* Link::add(Link* n)
 
 Link* Link::erase()
 {
-	if (this == nullptr)
-	{
-		return nullptr;
-	}
 	if (prev)
 	{
 		prev->succ = succ;
@@ -93,10 +81,6 @@ const Link* Link::find(const std::string& s) const
 
 Link* Link::advance(int n) const
 {
-	if (this == nullptr)
-	{
-		return nullptr;
-	}
 	Link* p = const_cast<Link*>(this);
 	if (n > 0)
 	{

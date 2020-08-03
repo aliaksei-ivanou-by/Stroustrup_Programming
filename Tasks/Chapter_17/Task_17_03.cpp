@@ -8,13 +8,13 @@ void to_lower(char* s)
 		{
 			*s += 'a' - 'A';
 		}
-	} while (*s++ && *s != '0');
+	} while (*s++ && *s != '\0');
 }
 
 int main()
 try
 {
-	char ch_temp[] = "HELLO, WORLD!";
+	char ch_temp[] = "DOES 0 (ZERO) WORK?";
 	char* ch = ch_temp;
 	std::cout << ch << '\n';
 	to_lower(ch);
