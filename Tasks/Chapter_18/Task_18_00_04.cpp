@@ -5,7 +5,7 @@
 std::vector<int> gv = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
 
 // 2
-void f(std::vector<int> v);
+void f(const std::vector<int>& v);
 
 int factorial(int n);
 
@@ -36,7 +36,7 @@ catch (...)
 }
 
 // 3
-void f(std::vector<int> v)
+void f(const std::vector<int>& v)
 {
 	// 3.1, 3.2
 	std::vector<int> lv(gv);

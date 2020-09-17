@@ -1,7 +1,7 @@
 #include <iostream>
 #include "std_lib_facilities.h"
 
-std::string cat_dot(const std::string& s1, const std::string& s2, std::string delimeter = ".")
+std::string cat_dot(const std::string& s1, const std::string& s2, const std::string& delimeter = ".")
 {
 	return s1 + delimeter + s2;
 }

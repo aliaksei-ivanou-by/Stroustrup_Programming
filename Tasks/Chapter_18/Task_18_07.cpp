@@ -26,31 +26,19 @@ char* cat_dot(const char* s1, const char* s2, const char* delimeter = ".")
 	size_t delimeter_sz = my_strlen(delimeter);
 	size_t result_sz = s1_sz + delimeter_sz + s1_sz + 1;
 	char* result = new char[result_sz];
-	for (size_t i = 0; i < result_sz; ++i)
+	for (size_t i = 0; i < s1_sz; ++i)
 	{
-		if (i < s1_sz)
-		{
-			*(result + i) = *(s1++);
-		}
-		else
-		{
-			if ((i >= s1_sz) && (i < s1_sz + delimeter_sz))
-			{
-				*(result + i) = *(delimeter++);
-			}
-			else
-			{
-				if ((i >= s1_sz + delimeter_sz) && (i < result_sz - 1))
-				{
-					*(result + i) = *(s2++);
-				}
-				else
-				{
-					*(result + i) = '\0';
-				}
-			}
-		}
+		result[i] = *(s1++);
 	}
+	for (size_t i = s1_sz; i < s1_sz + delimeter_sz; ++i)
+	{
+		result[i] = *(delimeter++);
+	}
+	for (size_t i = s1_sz + delimeter_sz; i < result_sz - 1; ++i)
+	{
+		result[i] = *(s2++);
+	}
+	result[result_sz] = '\0';
 	return result;
 }
 
