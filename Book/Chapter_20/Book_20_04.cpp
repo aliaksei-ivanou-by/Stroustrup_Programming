@@ -1,0 +1,6 @@
+//...
+vector<double<& v = *jill_data;
+double* middle = &v[0] + v.size() / 2;
+double* high1 = high(&v[0], middle);
+double* high2 = high(middle, &v[0] + v.size());
+//...
