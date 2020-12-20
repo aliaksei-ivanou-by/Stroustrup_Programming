@@ -1,15 +1,16 @@
-#ifndef TASK_20_02_STDAFX_H
-#define TASK_20_02_STDAFX_H
+#ifndef TASK_20_03_STDAFX_H
+#define TASK_20_03_STDAFX_H
 
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <limits>
 
 #endif
 
 double* high(double* first, double* last)
 {
-	double h = -1;
+	double h = DBL_MIN;
 	double* high = nullptr;
 	for (double* p = first; p != last; ++p)
 	{
@@ -22,9 +23,43 @@ double* high(double* first, double* last)
 	return high;
 }
 
+double* high(double* myArray, size_t size)
+{
+	if (size == 0)
+	{
+		return nullptr;
+	}
+	double* high = &myArray[0];
+	for (size_t i = 0; i < size; ++i)
+	{
+		if (myArray[i] > *high)
+		{
+			high = &myArray[i];
+		}
+	}
+	return high;
+}
+
+double* high(std::vector<double>& myVector)
+{
+	if (myVector.size() == 0)
+	{
+		return nullptr;
+	}
+	double* high = &myVector[0];
+	for (size_t i = 0; i < myVector.size(); ++i)
+	{
+		if (myVector[i] > *high)
+		{
+			high = &myVector[i];
+		}
+	}
+	return high;
+}
+
 double* get_from_jack(int* count)
 {
-	std::string fileName = "Task_20_02_jack.txt";
+	std::string fileName = "Task_20_03_jack.txt";
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{
@@ -48,7 +83,7 @@ double* get_from_jack(int* count)
 
 std::vector<double>* get_from_jill()
 {
-	std::string fileName = "Task_20_02_jill.txt";
+	std::string fileName = "Task_20_03_jill.txt";
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{

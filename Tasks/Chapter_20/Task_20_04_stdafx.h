@@ -40,7 +40,7 @@ double* get_from_jack(int* count)
 		v.push_back(d);
 	}
 	*count = static_cast<int>(v.size());
-	double* data = new double[*count];
+	double* data = std::make_unique<double[]>(*count).release();
 	std::copy(v.begin(), v.end(), data);
 	return data;
 }
@@ -51,15 +51,15 @@ std::vector<double>* get_from_jill()
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw("Can't open file");
 	}
-	std::unique_ptr<std::vector<double>> newVector{ new std::vector<double> };
+	std::vector<double>* newVector = std::make_unique<std::vector<double>>().release();
 	double number;
 	while (fileStream >> number)
 	{
 		(*newVector).push_back(number);
 	}
-	return newVector.release();
+	return newVector;
 }
 
 void fct()

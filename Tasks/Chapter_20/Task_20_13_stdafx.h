@@ -23,10 +23,10 @@ template<class Elem>
 class Link
 {
 public:
-	Link(const Elem& v = Elem(), Link* p = nullptr, Link* s = nullptr):
-		prev(p),
-		succ(s),
-		val(v)
+	Link(const Elem& v = Elem(), Link* p = nullptr, Link* s = nullptr) :
+		prev{ p },
+		succ{ s },
+		val{ v }
 	{}
 	Link* prev;
 	Link* succ;
@@ -37,8 +37,8 @@ template<class Elem>
 class list
 {
 public:
-	list():
-		first( nullptr )
+	list() :
+		first{ nullptr }
 	{}
 	Link<Elem>* first;
 	Link<Elem>* last;
@@ -57,7 +57,7 @@ public:
 	void push_back(const Elem& v);
 	void push_front(const Elem& v)
 	{
-		first = new Link<Elem>(v, nullptr, first);
+		first = std::make_unique<Link<Elem>>(v, nullptr, first).release();
 	}
 	void pop_front();
 	void pop_back();
@@ -74,8 +74,8 @@ class list<Elem>::iterator
 private:
 	Link<Elem>* curr;
 public:
-	iterator(Link<Elem>* p):
-		curr(p)
+	iterator(Link<Elem>* p) :
+		curr{ p }
 	{}
 	iterator& operator++()
 	{
