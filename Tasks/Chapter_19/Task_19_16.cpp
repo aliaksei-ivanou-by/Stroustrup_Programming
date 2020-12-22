@@ -6,8 +6,7 @@ int main(int argc, char** argv)
 try
 {
 	std::cout << "sizeof(vectorShort<int>\t\t" << sizeof(vectorShort<int>) << '\n';
-	std::cout << "sizeof(int*)\t\t\t" << sizeof(int*);
-
+	std::cout << "sizeof(int*)\t\t\t" << sizeof(int*) << '\n';
 }
 catch (const std::exception& e)
 {

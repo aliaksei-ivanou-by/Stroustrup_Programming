@@ -19,13 +19,12 @@ public:
 		space{ 0 }
 	{}
 	vector(int n) :
-		elem{ new T[n] },
+		elem{ std::make_unique<T[]>(n).release() },
 		sz{ n },
 		space{ n }
 	{
 		if (!elem)
 		{
-			delete[] elem;
 			throw("Bad allocation");
 		}
 		T temp = T();
@@ -51,7 +50,7 @@ private:
 	vector<T>* v;
 public:
 	vectorShort() :
-		v{ new vector<T>() }
+		v{ std::make_unique<vector<T>>().release() }
 	{
 		if (!v)
 		{
@@ -59,7 +58,7 @@ public:
 		}
 	}
 	vectorShort(int n) :
-		v{ new vector<T>(n) }
+		v{ std::make_unique<vector<T>>(n).release() }
 	{
 		if (!v)
 		{
