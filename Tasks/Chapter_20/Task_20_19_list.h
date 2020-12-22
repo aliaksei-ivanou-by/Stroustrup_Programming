@@ -1,23 +1,9 @@
-#ifndef TASK_20_12_STDAFX_H
-#define TASK_20_12_STDAFX_H
+#ifndef TASK_20_19_LIST_H
+#define TASK_20_19_LIST_H
 
-#include <iostream>
-
+#ifndef TASK_20_19_STDAFX_H
+#include "Task_20_19_stdafx.h"
 #endif
-
-template<class Iterator>
-Iterator high(Iterator first, Iterator last)
-{
-	Iterator high = first;
-	for (Iterator p = first; p != last; ++p)
-	{
-		if (*high < *p)
-		{
-			high = p;
-		}
-	}
-	return high;
-}
 
 template<class Elem>
 class Link
@@ -37,14 +23,15 @@ template<class Elem>
 class list
 {
 private:
+	int sz;
 	Link<Elem>* first;
 	Link<Elem>* last;
-	int sz;
 public:
 	list() :
 		first{ std::make_unique<Link<Elem>>().release() },
 		last{ first }
 	{}
+
 	class iterator;
 	iterator begin()
 	{
@@ -87,6 +74,15 @@ public:
 		return *first;
 	}
 	Elem& back();
+	~list()
+	{
+		while (first != nullptr)
+		{
+			auto p = first->succ;
+			delete first;
+			first = p;
+		}
+	}
 };
 
 template<class Elem>
@@ -100,17 +96,33 @@ public:
 	{}
 	iterator& operator++()
 	{
+		if (curr->succ == nullptr)
+		{
+			throw std::out_of_range("bad iterator _ out of range");
+		}
 		curr = curr->succ;
 		return *this;
 	}
 	iterator& operator--()
 	{
+		if (curr->prev == nullptr)
+		{
+			throw std::out_of_range("bad iterator _ out of range");
+		}
 		curr = curr->prev;
 		return *this;
 	}
 	Elem& operator*()
 	{
 		return curr->val;
+	}
+	const Elem& operator*() const
+	{
+		return curr->val;
+	}
+	Link<Elem>* operator->()
+	{
+		return curr;
 	}
 	Link<Elem>* ptr()
 	{
@@ -125,3 +137,5 @@ public:
 		return curr != b.curr;
 	}
 };
+
+#endif

@@ -9,10 +9,10 @@ try
 	int number;
 	while (std::cin >> number)
 	{
-		myList.push_front(number);
+		myList.push_back(number);
 	}
 	auto p = high(myList.begin(), myList.end());
-	std::cout << "High value of myList is " << *p;
+	std::cout << "High value of myList is " << *p << '\n';
 }
 catch (const std::exception& e)
 {
