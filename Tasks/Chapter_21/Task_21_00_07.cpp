@@ -5,9 +5,9 @@
 int main()
 try
 {
-	//part11(); // 1.1 - 7 vector
-	//part12(); // 1.8 list
-	//part2(); // 2 map
+	part11(); // 1.1 - 7 vector
+	part12(); // 1.8 list
+	part2(); // 2 map
 	part3(); // 3 vector
 }
 catch (const std::exception& e)
