@@ -1,0 +1,42 @@
+Robin_Scherbatsky	Vancouver_BritishColumbia_Canada	April-3-1982
+Broccoli	1.11	2
+Pineapple	1.48	1
+Onion	1.94	1
+Mushrooms	1.48	1
+Blueberries	2.88	1
+
+Barney_Stinson	Albuquerque_NewMexico_US	June-15-1973
+Apple	2.97	1
+
+Ted_Mosby	Columbus_Ohio_US	July-29-1974
+Clementine	3.34	2
+Kiwi	3.48	5
+Lemon	2.98	1
+
+Penny_Mosby	Oakland_California_US	January-7-1987
+Carrot	1.46	10
+Spinach	3.86	5
+Bread	4.48	3
+
+Luke_Mosby	MissionViejo_California_US	July-11-1989
+Cauliflower	2.47	2
+Pepper	3.28	2
+
+Sandy_Rivers	Salisbury_Maryland_US	February-25-1966
+Carrot	1.46	2
+Spinach	3.86	4
+
+Marvin_Eriksen	Fontana_California_US	October-4-1957
+Bread	4.48	1
+Zucchini	2.96	10
+
+Claudia_Bowers	Memphis_Tennessee_US	March-18-1978
+Avocado	3.26	5
+
+Brad_Morris	Pittsburgh_Pennsylvania_US	December-28-1976
+Pineapple	1.48	1
+Onion	1.94	3
+
+James_Stinson	Columbus_Georgia_US	June-2-1972
+Strawberries	3.27	3
+
