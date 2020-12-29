@@ -1,0 +1,45 @@
+Ted_Mosby	Columbus_Ohio_US	July-29-1974
+Carrot	1.92	2
+Clementine	3.34	1
+Orange	4.0	3
+Lemon	2.98	1
+
+Marshall_Eriksen	LosAngeles_California_US	January-18-1980
+Lime	2.48	2
+Grapefruit	4.47	4
+
+Lily_Aldrin	Washington_DC_US	March-24-1974
+Avocado	2.22	5
+Cauliflower	2.47	2
+
+Sandy_Rivers	Salisbury_Maryland_US	February-25-1966 
+Blueberries	4.58	2
+Brussels_sprouts	2.24	3
+Broccoli_crowns	1.11	2
+
+Lucy_Zinman	Burbank_California_US	November-4-1998
+Celery	0.98	1
+Potato	0.94	1
+Avocado	2.22	5
+
+Marvin_Eriksen	Fontana_California_US	October-4-1957
+Avocado	2.22	10
+
+Judy_Eriksen	Buffalo_NewYork_US	June-3-1958
+Zucchini	0.76	2
+Avocado	2.22	1
+
+Virginia_Mosby	Lynwood_California_US	January-31-1951
+Grapefruit	4.47	4
+Carrot	1.92	2
+Clementine	3.34	1
+
+Gary_Blauman	CulverCity_California_US	April-1-1982
+Carrot	1.92	1
+Clementine	3.34	3
+
+Claudia_Bowers	Memphis_Tennessee_US	March-18-1978
+Avocado	2.22	1
+Cauliflower	2.47	2
+Zucchini	0.76	2
+

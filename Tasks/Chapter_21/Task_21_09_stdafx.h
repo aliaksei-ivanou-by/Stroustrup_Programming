@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <algorithm>
 #include <list>
 #include <set>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
 
 #endif
 

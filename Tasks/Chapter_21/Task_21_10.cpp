@@ -2,18 +2,18 @@
 #include "Task_21_10_stdafx.h"
 #endif
 
-int main()
+int main(int argc, char** argv)
 try
 {
 	std::vector<Order> orders;
-	std::string fileNameFrom("Task_21_10_fileNameFrom.txt");
-	std::ifstream inputStream(fileNameFrom.c_str());
-	if (!inputStream)
+	std::string fileName = "Task_21_10_File.txt";
+	std::ifstream fileInputStream(fileName.c_str());
+	if (!fileInputStream)
 	{
-		throw ("Can't open file");
+		throw ("Can't open file " + fileName);
 	}
 	Order order;
-	while (inputStream >> order)
+	while (fileInputStream >> order)
 	{
 		orders.push_back(order);
 		order = Order();
@@ -22,16 +22,14 @@ try
 	{
 		std::cout << *i;
 	}
-	inputStream.close();
-
-	double totalSum = 0.0;
+	double totalSum = 0;
 	for (auto i = orders.begin(); i != orders.end(); ++i)
 	{
-		totalSum = std::inner_product(i->get_clientPurchasesBegin(), i->get_clientPurchasesEnd(),
-			i->get_clientPurchasesBegin(),
+		totalSum = std::inner_product(i->getClientPurchasesBegin(), i->getClientPurchasesEnd(),
+			i->getClientPurchasesBegin(),
 			totalSum,
 			std::plus<double>(),
-			[&i](const Purchase& a, const Purchase& b) { return a.get_count() * b.get_unit_price(); });
+			[&orders](Purchase a, Purchase b) { return a.getPurchaseCount() * b.getPurchaseUnitPrice(); });
 	}
 	std::cout << "Total: " << totalSum << '\n';
 }
