@@ -31,43 +31,36 @@ void Window_Order::cbButtonAdd(Address, Address pw)
 
 void Window_Order::Add()
 {
-	// Read from file
+	// READ FILE
 	std::string fileName = boxFileName.get_string();
-
-	std::list<Order> listOrders;
 	std::ifstream fileInputStream(fileName.c_str());
+	std::vector<Order> ordersFile;
 	Order orderFile;
 	while (fileInputStream >> orderFile)
 	{
-		listOrders.push_back(orderFile);
+		ordersFile.push_back(orderFile);
 		orderFile = Order();
 	}
+	std::sort(ordersFile.begin(), ordersFile.end());
 	fileInputStream.close();
 
-	// Write to file
+	// WRITE FILE
 	std::string clientName = boxClientName.get_string();
 	std::string clientAddress = boxClientAddress.get_string();
 	std::string clientBirthdayDate = boxClientBirthdayDate.get_string();
 	std::string purchaseName = boxPurchaseName.get_string();
-	double purchaseUnitPrice = std::stod(boxPurchaseUnitPrice.get_string());
+	double purchaseInitPrice = std::stod(boxPurchaseUnitPrice.get_string());
 	int purchaseCount = boxPurchaseCount.get_int();
-
-	Purchase purchase = Purchase(purchaseName, purchaseUnitPrice, purchaseCount);
+	Purchase purchase = Purchase(purchaseName, purchaseInitPrice, purchaseCount);
 	std::vector<Purchase> purchases;
 	purchases.push_back(purchase);
-
 	Order orderAdd = Order(clientName, clientAddress, clientBirthdayDate, purchases);
-	listOrders.push_back(orderAdd);
-
-	std::set<Order> setOrders;
-	for (auto i = listOrders.begin(); i != listOrders.end(); ++i)
-	{
-		setOrders.insert(*i);
-	}
-	std::ofstream fileOutputStream(fileName.c_str());
-
-	for (auto i = setOrders.begin(); i != setOrders.end(); ++i)
+	ordersFile.push_back(orderAdd);
+	std::sort(ordersFile.begin(), ordersFile.end());
+	std::ofstream fileOutputStream(fileName.c_str(), std::ios_base::trunc);
+	for (auto i = ordersFile.begin(); i != ordersFile.end(); ++i)
 	{
 		fileOutputStream << *i;
 	}
+	fileOutputStream.close();
 }

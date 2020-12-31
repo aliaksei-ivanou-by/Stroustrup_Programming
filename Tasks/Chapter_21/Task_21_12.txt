@@ -1,0 +1,41 @@
+Ted_Mosby	Columbus_Ohio_US	July-29-1974
+Carrot	1.92	2
+Clementine	3.34	1
+Orange	4.0	3
+Lemon	2.98	1
+
+Marshall_Eriksen	LosAngeles_California_US	January-18-1980
+Lime	2.48	2
+Grapefruit	4.47	4
+
+Lily_Aldrin	Washington_DC_US	March-24-1974
+Avocado	2.22	5
+Cauliflower	2.47	2
+
+Robin_Scherbatsky	Vancouver_BritishColumbia_Canada	April-3-1982
+Asparagus	2.98	4
+Pepper	3.28	3
+
+Barney_Stinson	Albuquerque_NewMexico_US	June-15-1973
+Brussels_sprouts	2.24	3
+Broccoli_crowns	1.11	1
+
+Tracy_McConnell	CherryHill_NewJersey_US	August-16-1985
+Zucchini	0.76	1
+
+Penny_Mosby	Oakland_California_US	January-7-1987
+Strawberries	3.27	3
+Blueberries	4.58	3
+
+Luke_Mosby	MissionViejo_California_US	July-11-1989
+Bananas	1.39	1
+Zucchini	0.76	2
+
+James_Stinson	Columbus_Georgia_US	June-2-1972
+Kiwi	3.48	2
+Tomatoes	4.48	2
+
+Ranjit_Singh	Mashhad_Iran	August-16-1950
+Celery	0.98	1
+Potato	0.94	1
+
