@@ -39,8 +39,8 @@ public:
 	vector();
 	explicit vector(int n);
 	vector(const vector& v);
-	vector& operator=(const vector& v);
 	vector(vector&& vv);
+	vector& operator=(const vector& v);
 	vector& operator=(vector&& vv);
 	~vector();
 	T& at(int n);
@@ -55,32 +55,26 @@ public:
 };
 
 template<class T, class A>
-vector<T, A>::vector()
-	: sz{ 0 },
-	elem{ nullptr },
-	space{ 0 }
-{
-}
-
-template<class T, class A>
 vector<T, A>::vector(int n)
 	: sz{ n },
 	elem{ nullptr },
 	space{ n }
 {
+	std::cout << "constructor()\n";
 	elem = alloc.allocate(n);
 	for (T* p = elem; p != elem + n; ++p)
 	{
-		alloc.construct(p, 0);
+		alloc.construct(p, {});
 	}
 }
 
 template<class T, class A>
-vector<T, A>::vector(const vector<T, A>& v)
-	: sz{ v.sz },
+vector<T, A>::vector(const vector<T, A>& v):
+	sz{ v.sz },
 	elem{ nullptr },
 	space{ v.sz }
 {
+	std::cout << "constructor() &\n";
 	elem = alloc.allocate(v.sz);
 	std::copy(v.elem, v.elem + v.sz, elem);
 }
@@ -88,6 +82,7 @@ vector<T, A>::vector(const vector<T, A>& v)
 template<class T, class A>
 vector<T, A>& vector<T, A>::operator=(const vector<T, A>& v)
 {
+	std::cout << "operator=() &\n";
 	if (this == &v)
 	{
 		return *this;
@@ -118,27 +113,28 @@ vector<T, A>& vector<T, A>::operator=(const vector<T, A>& v)
 }
 
 template<class T, class A>
-vector<T, A>::vector(vector<T, A>&& vv)
-	: sz{ vv.sz },
+vector<T, A>::vector(vector<T, A>&& vv):
+	sz{ vv.sz },
 	elem{ vv.elem },
 	space{ vv.space }
 {
+	std::cout << "constructor() &&\n";
 	vv.sz = 0;
+	vv.space = 0;
 	vv.elem = nullptr;
 }
 
 template<class T, class A>
 vector<T, A>& vector<T, A>::operator=(vector<T, A>&& vv)
 {
-	for (T* p = elem; p != elem + sz; ++p)
-	{
-		alloc.destroy(p);
-	}
-	alloc.deallocate(elem);
-	elem = vv.elem;
-	sz = vv.sz;
-	space = vv.space;
+	std::cout << "operator=() &&\n";
+	std::swap(elem, vv.elem);
+	std::swap(sz, vv.sz);
+	std::swap(space, vv.space);
+
+	alloc.deallocate(vv.elem);
 	vv.sz = 0;
+	vv.space = 0;
 	vv.elem = nullptr;
 	return *this;
 }
@@ -146,6 +142,7 @@ vector<T, A>& vector<T, A>::operator=(vector<T, A>&& vv)
 template<class T, class A>
 vector<T, A>::~vector()
 {
+	std::cout << "destructor()\n";
 	for (T* p = elem; p != elem + sz; ++p)
 	{
 		alloc.destroy(p);
@@ -203,12 +200,17 @@ void vector<T, A>::reserve(int newalloc)
 	{
 		return;
 	}
-	T* p = (std::unique_ptr<T>(new T[newalloc])).release();
+	std::unique_ptr<T> pp(alloc.allocate(newalloc));
+	T* p = pp.release();
 	for (int i = 0; i < sz; ++i)
 	{
-		p[i] = elem[i];
+		alloc.construct(&p[i], elem[i]);
 	}
-	delete[] elem;
+	for (int i = 0; i < sz; ++i)
+	{
+		alloc.destroy(&elem[i]);
+	}
+	alloc.deallocate(elem);
 	elem = p;
 	space = newalloc;
 }

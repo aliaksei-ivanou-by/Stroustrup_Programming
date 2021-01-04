@@ -25,7 +25,7 @@ public:
 	{
 		if (!elem)
 		{
-			throw("Bad allocation");
+			throw std::bad_alloc;
 		}
 		T temp = T();
 		for (int i = 0; i < sz; ++i)
@@ -54,7 +54,7 @@ public:
 	{
 		if (!v)
 		{
-			throw("Bad allocation");
+			throw std::bad_alloc;
 		}
 	}
 	vectorShort(int n) :
@@ -62,7 +62,7 @@ public:
 	{
 		if (!v)
 		{
-			throw("Bad allocation");
+			throw std::bad_alloc;
 		}
 	}
 	int size()

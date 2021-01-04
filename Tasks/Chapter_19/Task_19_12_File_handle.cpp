@@ -3,7 +3,7 @@
 #include "Task_19_12_File_handle.h"
 #endif
 
-File_handle::File_handle(const std::string&& fileName):
+File_handle::File_handle(const std::string& fileName):
 	fileStream{ fileName },
 	fileName{ fileName }
 {

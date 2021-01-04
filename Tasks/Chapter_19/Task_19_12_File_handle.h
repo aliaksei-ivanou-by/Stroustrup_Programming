@@ -11,7 +11,7 @@ private:
 	std::fstream fileStream;
 	std::string fileName;
 public:
-	File_handle(const std::string&& fileName);
+	File_handle(const std::string& fileName);
 	~File_handle();
 };
 

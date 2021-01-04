@@ -17,13 +17,13 @@ struct God
 		vehicle{ v },
 		weapon{ w }
 	{}
-	friend bool operator< (const God& godLeft, const God& godRight)
+	friend bool operator<(const God& godLeft, const God& godRight)
 	{
 		return godLeft.name < godRight.name;
 	}
-	friend bool operator> (const God& godLeft, const God& godRight)
+	friend bool operator>(const God& godLeft, const God& godRight)
 	{
-		return godLeft.name > godRight.name;
+		return operator<(godRight, godLeft);
 	}
 	friend std::ostream& operator<<(std::ostream& outputStream, const God& g)
 	{

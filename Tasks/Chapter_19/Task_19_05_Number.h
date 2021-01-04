@@ -22,11 +22,6 @@ public:
 	{
 		return value;
 	}
-	Number operator= (Number number)
-	{
-		std::swap(value, number.value);
-		return *this;
-	}
 	friend Number operator+(const Number& numberLeft, const Number& numberRight)
 	{
 		return Number(numberLeft.get() + numberRight.get());
@@ -47,7 +42,7 @@ public:
 		}
 		return Number(numberLeft.get() / numberRight.get());
 	}
-	Number operator% (Number& numberRight)
+	Number operator%(Number& numberRight)
 	{
 		return Number(value % numberRight.value);
 	}

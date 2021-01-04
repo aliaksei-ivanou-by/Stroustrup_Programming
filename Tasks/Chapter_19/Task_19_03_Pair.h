@@ -24,13 +24,13 @@ public:
 	{
 		return t2;
 	}
-	void setFirst(T1 t1ToUpdate)
+	void setFirst(T1&& t1ToUpdate)
 	{
-		t1 = t1ToUpdate;
+		t1 = std::move(t1ToUpdate);
 	}
-	void setFirst(T2 t2ToUpdate)
+	void setFirst(T2&& t2ToUpdate)
 	{
-		t2 = t2ToUpdate;
+		t2 = std::move(t2ToUpdate);
 	}
 	friend std::ostream& operator<< (std::ostream& outputStream, const Pair<T1, T2>& pair)
 	{

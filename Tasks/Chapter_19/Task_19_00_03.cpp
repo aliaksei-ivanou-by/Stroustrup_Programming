@@ -11,6 +11,13 @@ try
 	std::cout << "v.reserve(200)\n";
 	v.reserve(200);
 	std::cout << "v: size = " << v.size() << ", capacity = " << v.capacity() << '\n';
+	vector<int> vv(10);
+	vv = std::move(v);
+	std::cout << "vv: size = " << vv.size() << ", capacity = " << vv.capacity() << '\n';
+	std::cout << "v: size = " << v.size() << ", capacity = " << v.capacity() << '\n';
+	vector<int> vv1(std::move(vv));
+	std::cout << "vv1: size = " << vv1.size() << ", capacity = " << vv1.capacity() << '\n';
+	std::cout << "vv: size = " << vv.size() << ", capacity = " << vv.capacity() << '\n';
 }
 catch (const std::exception& e)
 {

@@ -7,7 +7,7 @@ try
 {
 	std::vector<Pair<std::string, double>> table;
 	table.push_back({ "pi", 3.141592653589 });
-	table.push_back({"e", 2.718281828459 });
+	table.push_back({ "e", 2.718281828459 });
 	std::cout << "Constants Table :\n";
 	for (size_t i = 0; i < table.size(); ++i)
 	{
