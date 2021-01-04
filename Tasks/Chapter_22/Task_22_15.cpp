@@ -1,0 +1,51 @@
+#ifndef TASK_22_15_STDAFX_H
+#include "Task_22_15_stdafx.h"
+#endif
+
+int main()
+try
+{
+	std::string fileName = "Task_22_15.txt";
+	std::map<std::string, int> data = fileOpen(fileName);
+	std::pair<int, int> dataYearRange = getYearRange(data);
+
+	double delta = (dataYearRange.second - dataYearRange.first) / static_cast<double>(nTicks);
+	std::ostringstream oss;
+	for (int i = 0; i <= nTicks; ++i)
+	{
+		oss << std::left << std::setw(10) << int(dataYearRange.first + i * delta);
+	}
+	std::string labelX = oss.str();
+
+	Simple_window win(Point(50, 50), maxX, maxY, "Programming languages");
+	
+	Axis axisX(Axis::x, Point(offsetX, maxY - offsetY), lengthX, nTicks, labelX);
+	axisX.label.move(-maxX / 3.5, 0);
+	axisX.set_color(Color::black);
+	win.attach(axisX);
+
+	Vector_ref<Shape> labels;
+
+	for (auto i = data.begin(); i != data.end(); ++i)
+	{
+		double ratio = (i->second - dataYearRange.first) / 
+			static_cast<double>(dataYearRange.second - dataYearRange.first);
+		int x = offsetX + ratio * (maxX - 2 * offsetX);
+		Text* label = new Text{ Point{ x, maxY - 2 * offsetY }, i->first };
+		updateAxisY(*label, labels);
+		label->set_color(Color::red);
+		labels.push_back(label);
+		win.attach(labels[labels.size() - 1]);
+	}
+
+	win.wait_for_button();
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}
