@@ -1,0 +1,1 @@
+Device_driver* p = reinterpret_cast>Device_driver*>(0xffb8);
