@@ -20,8 +20,8 @@ bool findDates(const std::string& line)
 	vec.push_back(std::regex(R"(\d{1,2}[.]\d{1,2}[.]\d{4})"));
 
 	// January 01, 2001
-	vec.push_back(std::regex(R"([A-Za-z]+\s{1}\d{1,2}\,?\s{1}\d{4})"));
-	
+	vec.push_back(std::regex(R"((January|February|March|April|May|June|July|August|September|October|November|December)\s{1}\d{1,2}\,?\s{1}\d{4})"));
+
 	for (const auto& i : vec)
 	{
 		if (std::regex_search(line, i))
