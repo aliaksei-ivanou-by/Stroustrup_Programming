@@ -1,0 +1,35 @@
+From: Maxim Puchinsky <maxim@bike.org.by>
+To: <aliaksei.ivanou.by@gmail.com>
+Subject: Membership card of the Minsk Cycling Society
+Date: Apr 1, 2020, 5:37 PM
+Good day!
+New MBO membership cards are ready.
+You can pick them up at the Moscow Military District office at 18 Pervomayskaya, room 504, from 12 to 20. At other times - by agreement.
+----
+From: Minsk Cycling Society <membership@bike.org.by>
+To: <aliaksei.ivanou.by@gmail.com>
+Subject: Your membership fee has been received
+Date: Dec 13, 2020, 4:41 PM
+Hello.
+We received your membership fee of 27.00 rubles,
+which was paid on 2020-12-13.
+Thanks a lot for your support!
+----
+From: Apple <no_reply@email.apple.com>
+To: <aliaksei.ivanou.by@icloud.com>
+Subject: Your Subscription is Expiring
+Date: Jan 13, 2021, 8:20 AM
+Dear Aliaksei,	
+The following subscription will expire soon:	
+Yandex.Plus (1 month) - USD 2.49/month starting 31 January	
+To renew or learn more, review your subscription.	
+Sincerely,
+Apple
+----
+From: Bartlomiej Filipek <bartlomiej.filipek@bfilipek.com>
+To: <aliaksei.ivanou.by@icloud.com>
+Subject: [New] A Debugging Tip: Write Custom Visualizers in Visual Studio
+Date: Jan 11, 2021, 11:40 AM
+Hello!
+Today I have a short, but useful debugging tip that you can apply in Visual Studio.
+----
