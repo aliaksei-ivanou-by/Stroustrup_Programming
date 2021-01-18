@@ -1,6 +1,6 @@
-#ifndef TASK_24_04_STDAFX
-#include "Task_24_04_stdafx.h"
-#include "Task_24_04_Gauss.h"
+#ifndef TASK_24_05_STDAFX
+#include "Task_24_05_stdafx.h"
+#include "Task_24_05_Gauss.h"
 #endif
 
 struct Elim_failure : std::domain_error
@@ -111,20 +111,20 @@ Vector operator*(const Matrix& m, const Vector& u)
 Vector random_Vector(Index n)
 {
 	Vector v(n);
-
 	for (Index i = 0; i < n; ++i)
+	{
 		v(i) = 1.0 * n * rand() / RAND_MAX;
-
+	}
 	return v;
 }
 
 Matrix random_matrix(Index n)
 {
 	Matrix m(n, n);
-
 	for (Index i = 0; i < n; ++i)
+	{
 		m[i] = random_Vector(n);
-
+	}
 	return m;
 }
 

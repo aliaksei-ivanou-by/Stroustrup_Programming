@@ -1,6 +1,6 @@
-#ifndef TASK_24_04_STDAFX
-#include "Task_24_04_stdafx.h"
-#include "Task_24_04_Gauss.h"
+#ifndef TASK_24_06_STDAFX
+#include "Task_24_06_stdafx.h"
+#include "Task_24_06_Gauss.h"
 #endif
 
 struct Elim_failure : std::domain_error
@@ -111,20 +111,20 @@ Vector operator*(const Matrix& m, const Vector& u)
 Vector random_Vector(Index n)
 {
 	Vector v(n);
-
 	for (Index i = 0; i < n; ++i)
+	{
 		v(i) = 1.0 * n * rand() / RAND_MAX;
-
+	}
 	return v;
 }
 
 Matrix random_matrix(Index n)
 {
 	Matrix m(n, n);
-
 	for (Index i = 0; i < n; ++i)
+	{
 		m[i] = random_Vector(n);
-
+	}
 	return m;
 }
 
@@ -138,6 +138,18 @@ void solve_random_system_classical(Index n)
 	{
 		Vector x = classical_gaussian_elimination(A, b);
 		std::cout << "classical elim solution is x = " << x << '\n';
+		Vector v = A * x;
+		std::cout << " A * x = " << v << '\n';
+		std::cout << '\n';
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Vector x = classical_gaussian_elimination_loop(A, b);
+		std::cout << "classical elim solution loop is x = " << x << '\n';
 		Vector v = A * x;
 		std::cout << " A * x = " << v << '\n';
 		std::cout << '\n';
@@ -166,4 +178,108 @@ void solve_random_system_pivotal(Index n)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	try
+	{
+		Vector x = pivotal_elimination_loop(A, b);
+		std::cout << "pivotal elim solution loop is x = " << x << '\n';
+		Vector v = A * x;
+		std::cout << " A * x = " << v << '\n';
+		std::cout << '\n';
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
+
+void classical_elimination_loop(Matrix& A, Vector& b)
+{
+	const Index n = A.dim1();
+	for (Index j = 0; j < n - 1; ++j)
+	{
+		const double pivot = A(j, j);
+		if (pivot == 0)
+		{
+			throw Elim_failure("Elimination failure in row " + std::to_string(j));
+		}
+		for (Index i = j + 1; i < n; ++i)
+		{
+			const double mult = A(i, j) / pivot;
+			for (Index k = j; k < n; ++k)
+			{
+				A(i, k) -= A(j, k) * mult;
+			}
+			b(i) -= mult * b(j);
+		}
+	}
+}
+
+Vector back_substitution_loop(const Matrix& A, const Vector& b)
+{
+	const Index n = A.dim1();
+	Vector x(n);
+	for (Index i = n - 1; i >= 0; --i)
+	{
+		double s = b(i);
+		for (Index j = i + 1; j < n; ++j)
+		{
+			s -= A(i, j) * x(j);
+		}
+		if (double m = A(i, i))
+		{
+			x(i) = s / m;
+		}
+		else
+		{
+			throw Back_subst_failure("Back substitution failure in row " + std::to_string(i));
+		}
+	}
+	return x;
+}
+
+void elim_with_partial_pivot_loop(Matrix& A, Vector& b)
+{
+	const Index n = A.dim1();
+	for (Index j = 0; j < n; ++j)
+	{
+		Index pivot_row = j;
+		for (Index k = j + 1; k < n; ++k)
+		{
+			if (abs(A(k, j)) > abs(A(pivot_row, j)))
+			{
+				pivot_row = k;
+			}
+		}
+		if (pivot_row != j)
+		{
+			A.swap_rows(j, pivot_row);
+			std::swap(b(j), b(pivot_row));
+		}
+		for (Index i = j + 1; i < n; ++i)
+		{
+			const double pivot = A(j, j);
+			if (pivot == 0)
+			{
+				throw std::runtime_error("No solution, pivot = 0");
+			}
+			const double mult = A(i, j) / pivot;
+			for (Index k = j; k < n; ++k)
+			{
+				A(i, k) -= A(j, k) * mult;
+			}
+			b(i) -= mult * b(j);
+		}
+	}
+}
+
+Vector classical_gaussian_elimination_loop(Matrix A, Vector b)
+{
+	classical_elimination_loop(A, b);
+	return back_substitution_loop(A, b);
+}
+
+Vector pivotal_elimination_loop(Matrix A, Vector b)
+{
+	elim_with_partial_pivot_loop(A, b);
+	return back_substitution_loop(A, b);
 }
