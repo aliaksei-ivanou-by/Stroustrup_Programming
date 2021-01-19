@@ -1,0 +1,50 @@
+﻿#ifndef TASK_25_03_STDAFX_H
+#include "Task_25_03_stdafx.h"
+#endif
+
+int main()
+try
+{
+	std::cout << "Signed int:\n";
+	signed int v1 = 0x0;
+	print(v1);
+	v1 = ~v1;
+	print(v1);
+	v1 = 0xaaaaaaaa;
+	print(v1);
+	v1 = 0x55555555;
+	print(v1);
+	v1 = 0xcccccccc;
+	print(v1);
+	v1 = 0x33333333;
+	print(v1);
+	v1 = 0xff00ff00;
+	print(v1);
+
+	std::cout << "\n\n";
+
+	std::cout << "Unsigned int:\n";
+	unsigned int v2 = 0x0;
+	print(v2);
+	v2 = ~v2;
+	print(v2);
+	v2 = 0xaaaaaaaa;
+	print(v2);
+	v2 = 0x55555555;
+	print(v2);
+	v2 = 0xcccccccc;
+	print(v2);
+	v2 = 0x33333333;
+	print(v2);
+	v2 = 0xff00ff00;
+	print(v2);
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}
