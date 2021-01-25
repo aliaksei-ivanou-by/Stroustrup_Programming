@@ -5,14 +5,22 @@
 int main()
 try
 {
-	list<int> myList;
-	int number;
-	while (std::cin >> number)
+	my_list<int> list1;
+	std::cout << "sizeof(list):\t" << sizeof(list1) << '\n';
+	my_list<int>* list2;
+	std::cout << "sizeof(list*):\t" << sizeof(list2) << '\n';
+
+	my_list<int> list3;
+	list3.push_front(1);
+	list3.push_front(2);
+	list3.push_front(3);
+	list3.push_back(4);
+	list3.push_back(5);
+	list3.push_back(6);
+	for (auto i = list3.begin(); i != list3.end(); ++i)
 	{
-		myList.push_front(number);
+		std::cout << *i << ' ';
 	}
-	auto p = high(myList.begin(), myList.end());
-	std::cout << "High value of myList is " << *p;
 }
 catch (const std::exception& e)
 {

@@ -1,31 +1,14 @@
-void erase_line(Document& d, int n)
+#ifndef TASK_20_00_06_STDAFX
+#include "Task_20_00_06.h"
+#endif
+
+void Document::erase_line(int n)
 {
-	if (n < 0 || d.line.size() - 1 <= n)
+	if (n < 0 || (*this).line.size() - 1 <= n)
 	{
 		return;
 	}
-	auto p = d.line.begin();
+	auto p = (*this).line.begin();
 	advance(p, n);
-	d.line.erase(p);
-}
-
-template<typename Iter>
-void advance(Iter& p, int n)
-{
-	if (n > 0)
-	{
-		while (n > 0)
-		{
-			++p;
-			--n;
-		}
-	}
-	else
-	{
-		if (n < 0)
-		{
-			--p;
-			++n;
-		}
-	}
+	(*this).line.erase(p);
 }

@@ -7,17 +7,8 @@
 
 #endif
 
-template<typename Iterator1, typename Iterator2>
-auto findLast(Iterator1 first, Iterator2 last)
-{
-	Iterator1 high = first;
-	while (first != last)
-	{
-		if (*first > *high)
-		{
-			high = first;
-		}
-		++first;
-	}
-	return high;
-}
+#ifndef TASK_20_07_ADDITIONAL_H
+
+#include "Task_20_07_Additional.h"
+
+#endif

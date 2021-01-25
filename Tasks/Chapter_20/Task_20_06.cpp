@@ -10,31 +10,38 @@ try
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{
-		throw ("Can't open the file");
+		throw std::runtime_error("Can't open the file");
 	}
 	Document myDoc;
 	fileStream >> myDoc;
 	std::cout << "Original text\n";
-	print(myDoc, myDoc.begin());
+	print(myDoc.begin(), myDoc.end());
 	std::cout << "\n\n";
 
 	std::cout << "Original text from some word\n";
-	std::string myString1 = "same";
-	Text_iterator findSome = find_text(myDoc.begin(), myDoc.end(), myString1);
+	std::string myString1 = "Discourse";
+	Text_iterator findSome = myDoc.find_text(myString1);
 	if (findSome == myDoc.end())
 	{
 		std::cout << "myString1 not found\n";
 	}
 	else
 	{
-		print(myDoc, findSome);
+		print(findSome, myDoc.end());
 	}
 	std::cout << "\n\n";
 
 	std::cout << "Text with replace\n";
-	std::string myString2 = "specific";
-	find_replace_text(myDoc.begin(), myDoc.end(), myString1, myString2);
-	print(myDoc, myDoc.begin());
+	std::string myString2 = "Course";
+	Text_iterator isReplaced = myDoc.find_replace_text(myString1, myString2);
+	if (isReplaced == myDoc.end())
+	{
+		std::cout << "myString1 not found\n";
+	}
+	else
+	{
+		print(myDoc.begin(), myDoc.end());
+	}
 }
 catch (const std::exception& e)
 {

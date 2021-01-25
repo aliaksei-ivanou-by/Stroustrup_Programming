@@ -5,7 +5,7 @@
 int main()
 try
 {
-	slist<int> myList;
+	my_slist<int> myList;
 	int number;
 	while (std::cin >> number)
 	{

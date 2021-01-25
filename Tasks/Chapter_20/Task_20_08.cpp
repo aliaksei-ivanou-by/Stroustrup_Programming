@@ -10,15 +10,15 @@ try
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{
-		throw ("Can't open the file");
+		throw std::runtime_error("Can't open the file");
 	}
 	Document myDoc;
 	fileStream >> myDoc;
 	std::cout << "Original text\n";
-	print(myDoc, myDoc.begin());
+	print(myDoc.begin(), myDoc.end());
 	std::cout << "\n\n";
 
-	std::cout << "Number of chars in text is " << count_chars(myDoc);
+	std::cout << "Number of chars in text is " << myDoc.count_chars();
 }
 catch (const std::exception& e)
 {

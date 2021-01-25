@@ -7,11 +7,11 @@ try
 {
 	// Jack Data
 	int jack_count = 0;
-	double* jack_data = get_from_jack(&jack_count);
+	std::unique_ptr<double[]> jack_data = get_from_jack(&jack_count);
 
-	double* jack_high_ptr = high(jack_data, jack_data + jack_count);
+	double* jack_high_ptr = high(&jack_data[0], &jack_data[0] + jack_count);
 
-	double* jack_high_arr = high(jack_data, jack_count);
+	double* jack_high_arr = high(jack_data.get(), jack_count);
 
 	std::vector<double> jack_vec;
 	for (int i = 0; i < jack_count; ++i)
@@ -21,17 +21,17 @@ try
 	double* jack_high_vec = high(jack_vec);
 
 	// Jill Data
-	std::vector<double>* jill_data = get_from_jill();
+	std::unique_ptr<std::vector<double>> jill_data = get_from_jill();
 
 	std::vector<double>& jill_vec = *jill_data;
 	double* jill_high_ptr = high(&jill_vec[0], &jill_vec[0] + jill_vec.size());
 
-	double* jill_arr = std::make_unique<double[]>((*jill_data).size()).release();
+	std::unique_ptr<double[]> jill_arr = std::make_unique<double[]>((*jill_data).size());
 	for (int i = 0; i < (*jill_data).size(); ++i)
 	{
 		jill_arr[i] = (*jill_data)[i];
 	}
-	double* jill_high_arr = high(jill_arr, (*jill_data).size());
+	double* jill_high_arr = high(jill_arr.get(), (*jill_data).size());
 
 	double* jill_high_vec = high(*jill_data);
 

@@ -10,19 +10,19 @@ try
 	std::ifstream fileStream(fileName.c_str());
 	if (!fileStream)
 	{
-		throw ("Can't open the file");
+		throw std::runtime_error("Can't open the file");
 	}
 	Document myDoc;
 	fileStream >> myDoc;
 	std::cout << "Original text\n";
-	print(myDoc, myDoc.begin());
+	print(myDoc.begin(), myDoc.end());
 	std::cout << "\n\n";
 
-	std::cout << "Number (1) of words in text is " << count_words_1(myDoc);
+	std::cout << "Number (1) of words in text is " << myDoc.count_words_1();
 
 	std::cout << '\n';
 
-	std::cout << "Number (2) of words in text is " << count_words_2(myDoc);
+	std::cout << "Number (2) of words in text is " << myDoc.count_words_2();
 }
 catch (const std::exception& e)
 {

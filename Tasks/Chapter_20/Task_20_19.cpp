@@ -5,7 +5,7 @@
 int main()
 try
 {
-	list<int> myList;
+	my_list<int> myList;
 	int n = 10;
 	for (int i = n; i > 0; --i)
 	{
