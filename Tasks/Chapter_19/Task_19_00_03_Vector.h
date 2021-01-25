@@ -131,11 +131,6 @@ vector<T, A>& vector<T, A>::operator=(vector<T, A>&& vv)
 	std::swap(elem, vv.elem);
 	std::swap(sz, vv.sz);
 	std::swap(space, vv.space);
-
-	alloc.deallocate(vv.elem);
-	vv.sz = 0;
-	vv.space = 0;
-	vv.elem = nullptr;
 	return *this;
 }
 
