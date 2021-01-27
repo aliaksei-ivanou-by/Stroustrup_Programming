@@ -1,6 +1,6 @@
-#ifndef TASK_21_15_STDAFX
-#include "Task_21_15_stdafx.h"
-#include "Task_21_15_TextClean.h"
+#ifndef TASK_21_14_STDAFX
+#include "Task_21_14_stdafx.h"
+#include "Task_21_14_textClean.h"
 #endif
 
 void fileOpen(std::ifstream& inputFileStream, const std::string& fileName)

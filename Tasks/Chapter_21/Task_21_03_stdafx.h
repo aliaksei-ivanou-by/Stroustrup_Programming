@@ -6,16 +6,8 @@
 
 #endif
 
-template<typename Iterator, typename T>
-unsigned int myCount(Iterator first, Iterator last, const T& value)
-{
-	unsigned int counter = 0;
-	while (first != last)
-	{
-		if (*first++ == value)
-		{
-			++counter;
-		}
-	}
-	return counter;
-}
+#ifndef TASK_21_03_MYCOUNT_H
+
+#include "Task_21_03_myCount.h"
+
+#endif

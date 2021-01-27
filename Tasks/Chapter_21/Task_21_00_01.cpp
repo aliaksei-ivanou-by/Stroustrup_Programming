@@ -8,7 +8,7 @@ try
 	std::vector<int> myVector;
 	int n;
 	std::cin >> n;
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 	for (int i = 0; i < n; ++i)
 	{
 		myVector.push_back(rand() % 100);

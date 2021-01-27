@@ -9,7 +9,7 @@ try
 	std::ifstream fileStream{ fileName };
 	if (!fileStream)
 	{
-		throw ("Can't read file ");
+		throw std::runtime_error("Can't read file");
 	}
 
 	std::map<std::string, int> words;

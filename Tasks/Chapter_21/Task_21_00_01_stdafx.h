@@ -6,25 +6,8 @@
 
 #endif
 
-template<typename In, typename T>
-In find1(In first, In last, const T& val)
-{
-	while (first != last && *first != val)
-	{
-		++first;
-	}
-	return first;
-}
+#ifndef TASK_21_00_01_FIND_H
 
-template<typename In, typename T>
-In find2(In first, In last, const T& val)
-{
-	for (In p = first; p != last; ++p)
-	{
-		if (*p == val)
-		{
-			return p;
-		}
-	}
-	return last;
-}
+#include "Task_21_00_01_find.h"
+
+#endif

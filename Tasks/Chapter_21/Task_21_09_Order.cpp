@@ -182,13 +182,11 @@ std::istream& operator>>(std::istream& inputStream, Order& order)
 	{
 		Purchase purchase;
 		std::stringstream ss2(line2);
-
 		if (ss2 >> purchase)
 		{
 			order.addPurchase(purchase);
 		}
 	}
-
 	return inputStream;
 }
 
@@ -198,7 +196,6 @@ std::ostream& operator<<(std::ostream& outputStream, const Order& order)
 		order.clientName << '\t' <<
 		order.clientAddress << '\t' << 
 		order.clientBirthdayDate << '\n';
-
 	for (auto i = order.getClientPurchasesBegin(); i != order.getClientPurchasesEnd(); ++i)
 	{
 		outputStream << *i << '\n';

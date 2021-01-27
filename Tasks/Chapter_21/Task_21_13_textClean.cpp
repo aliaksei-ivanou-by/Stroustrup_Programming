@@ -1,6 +1,6 @@
-#ifndef TASK_21_15_STDAFX
-#include "Task_21_15_stdafx.h"
-#include "Task_21_15_TextClean.h"
+#ifndef TASK_21_13_STDAFX
+#include "Task_21_13_stdafx.h"
+#include "Task_21_13_textClean.h"
 #endif
 
 void fileOpen(std::ifstream& inputFileStream, const std::string& fileName)
@@ -128,6 +128,10 @@ std::map<std::string, int> textClean(const std::string& fileName)
 {
 	std::ifstream inputFileStream;
 	fileOpen(inputFileStream, fileName);
+	if (!inputFileStream)
+	{
+		throw std::runtime_error("Can't open file");
+	}
 
 	char ch;
 	std::ostringstream outputStringStream;

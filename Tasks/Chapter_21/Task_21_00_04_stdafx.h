@@ -3,14 +3,12 @@
 
 #include <iostream>
 #include <map>
-#include<numeric>
+#include <numeric>
 
 #endif
 
-double weighted_value(
-	const std::pair<std::string, double>& a, 
-	const std::pair<std::string, double>& b
-)
-{
-	return a.second * b.second;
-}
+#ifndef TASK_21_00_04_WEIGHTED_VALUE_H
+
+#include "Task_21_00_04_weighted_value.h"
+
+#endif

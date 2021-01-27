@@ -30,14 +30,12 @@ try
 		std::cout << "Binary Search for number " << vecNumber << " : number isn't found!\n";
 	}
 	
-
 	std::list<std::string> li;
 	constexpr size_t liSize = 10;
 	for (size_t i = 0; i < liSize; ++i)
 	{
 		li.push_back(std::string(1, 65 + i));
 	}
-
 	std::cout << '\n';
 	
 	std::cout << "List is :\n";

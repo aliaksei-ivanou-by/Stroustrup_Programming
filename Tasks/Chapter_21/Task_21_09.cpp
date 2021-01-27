@@ -12,7 +12,7 @@ try
 	std::ifstream fileInputStream1(fileName1.c_str());
 	if (!fileInputStream1)
 	{
-		throw ("Can't open file " + fileName1);
+		throw std::runtime_error("Can't open file");
 	}
 	Order order1;
 	while (fileInputStream1 >> order1)
@@ -47,7 +47,7 @@ try
 	std::ifstream fileInputStream2(fileName2.c_str());
 	if (!fileInputStream2)
 	{
-		throw ("Can't open file " + fileName2);
+		throw std::runtime_error("Can't open file");
 	}
 	Order order2;
 	while (fileInputStream2 >> order2)

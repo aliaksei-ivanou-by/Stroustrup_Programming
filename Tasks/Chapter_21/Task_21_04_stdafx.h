@@ -6,16 +6,8 @@
 
 #endif
 
-template<typename Iterator, typename Predicate>
-unsigned int myCountIf(Iterator first, Iterator last, Predicate predicate)
-{
-	unsigned int counter = 0;
-	while (first != last)
-	{
-		if (predicate(*first++))
-		{
-			++counter;
-		}
-	}
-	return counter;
-}
+#ifndef TASK_21_04_MYCOUNTIF_H
+
+#include "Task_21_04_myCountIf.h"
+
+#endif

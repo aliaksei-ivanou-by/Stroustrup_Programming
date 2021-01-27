@@ -10,7 +10,7 @@ try
 	std::ifstream fileInputStream(fileName.c_str());
 	if (!fileInputStream)
 	{
-		throw ("Can't open file " + fileName);
+		throw std::runtime_error("Can't open file " + fileName);
 	}
 	Order order;
 	while (fileInputStream >> order)

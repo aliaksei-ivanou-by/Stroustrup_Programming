@@ -34,6 +34,10 @@ void Window_Order::Add()
 	// READ FILE
 	std::string fileName = boxFileName.get_string();
 	std::ifstream fileInputStream(fileName.c_str());
+	if (!fileInputStream)
+	{
+		throw std::runtime_error("Can't open file");
+	}
 	std::vector<Order> ordersFile;
 	Order orderFile;
 	while (fileInputStream >> orderFile)
