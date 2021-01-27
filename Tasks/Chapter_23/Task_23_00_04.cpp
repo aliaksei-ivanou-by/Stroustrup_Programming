@@ -10,6 +10,7 @@ try
 	if (!inputFileStream)
 	{
 		std::cerr << "No file\n";
+		throw std::runtime_error("No file");
 	}
 	std::regex pattern(R"(\w{2}\s*\d{5}(-\d{4})?)");
 

@@ -8,22 +8,8 @@
 
 #endif
 
-struct bad_from_string : std::bad_cast
-{
-	const char* what() const
-	{
-		return "bad cast from string";
-	}
-};
+#ifndef TASK_23_09_FROM_STRING_H
 
-template<class T>
-T from_string(const std::string& s)
-{
-	std::istringstream is(s);
-	T t;
-	if (!(is >> t))
-	{
-		throw bad_from_string();
-	}
-	return t;
-}
+#include "Task_23_09_from_string.h"
+
+#endif

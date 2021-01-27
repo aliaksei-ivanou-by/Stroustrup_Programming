@@ -9,7 +9,7 @@ try
 	std::ifstream inputFileStream(fileName);
 	if (!inputFileStream)
 	{
-		throw ("Can't open file");
+		throw std::runtime_error("Can't open file");
 	}
 
 	std::string line;

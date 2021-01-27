@@ -9,7 +9,7 @@ try
 	std::ifstream inputFileStream{ fileName1 };
 	if (!inputFileStream)
 	{
-		throw ("Can't read file");
+		throw std::runtime_error("Can't read file");
 	}
 	std::string fileName2 = "Task_23_12_result.txt";
 	std::ofstream outputFileStream{ fileName2 };

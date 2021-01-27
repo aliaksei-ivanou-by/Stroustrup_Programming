@@ -9,7 +9,7 @@ try
 	std::ifstream inputFileStream{ fileName };
 	if (!inputFileStream)
 	{
-		throw ("Can't read file");
+		throw std::runtime_error("Can't read file");
 	}
 
 	int lineno = 0;
