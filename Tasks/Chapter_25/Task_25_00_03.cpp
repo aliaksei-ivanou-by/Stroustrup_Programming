@@ -1,5 +1,6 @@
-#include <iostream>
-#include <bitset>
+#ifndef TASK_25_00_03_STDAFX_H
+#include "Task_25_00_03_stdafx.h"
+#endif
 
 int main()
 try
