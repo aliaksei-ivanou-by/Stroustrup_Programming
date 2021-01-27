@@ -16,7 +16,7 @@ try
 		std::vector<int> hist(n + 1);
 		for (int i = 0; i < d; ++i)
 		{
-			++hist[randint(n)];
+			++hist[rand_int(n)];
 		}
 		std::cout << "Distribution of numbers:\n";
 		for (size_t i = 0; i != hist.size(); ++i)

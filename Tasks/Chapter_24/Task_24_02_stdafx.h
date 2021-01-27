@@ -7,26 +7,8 @@
 
 #endif
 
-struct TripleRef // Modifies input parameter
-{
-	void operator()(int& n)
-	{
-		n *= 3;
-	}
-};
+#ifndef TASK_24_02_FUNC_H
 
-struct TripleInt // Doesn't modify input parameter
-{
-	int operator()(int n)
-	{
-		return n * 3;
-	}
-};
+#include "Task_24_02_func.h"
 
-struct TripleIntRef // Modifies input parameter
-{
-	int operator()(int& n)
-	{
-		return n *= 3;
-	}
-};
+#endif

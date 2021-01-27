@@ -6,9 +6,8 @@
 
 #endif
 
-int randint(int max)
-{
-	static std::default_random_engine ran;
-	int result = std::uniform_int_distribution<>{ 0, max }(ran);
-	return result;
-}
+#ifndef TASK_24_10_RAND_INT_H
+
+#include "Task_24_10_rand_int.h"
+
+#endif

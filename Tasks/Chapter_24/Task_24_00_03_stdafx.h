@@ -10,16 +10,8 @@
 
 #endif
 
-void mySqrt()
-{
-	int number;
-	std::cin >> number;
-	if (number <= 0)
-	{
-		std::cout << "no sqrt\n";
-	}
-	else
-	{
-		std::cout << "sqrt = " << sqrt(number) << '\n';
-	}
-}
+#ifndef TASK_24_00_03_MYSQRT_H
+
+#include "Task_24_00_03_mySqrt.h"
+
+#endif

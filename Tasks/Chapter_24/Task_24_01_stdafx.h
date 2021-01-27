@@ -7,17 +7,8 @@
 
 #endif
 
-inline void tripleRef(int& n) // Modifies input parameter
-{
-	n *= 3;
-}
+#ifndef TASK_24_01_FUNC_H
 
-inline int tripleInt(int n) // Doesn't modify input parameter
-{
-	return n * 3;
-}
+#include "Task_24_01_func.h"
 
-inline int tripleIntRef(int& n) // Modifies input parameter
-{
-	return n *= 3;
-}
+#endif
