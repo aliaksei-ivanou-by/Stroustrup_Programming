@@ -1,3 +1,7 @@
+#ifndef TASK_20_00_01_H
+#include "Task_20_00_01.h"
+#endif
+
 double* high(double* first, double* last)
 {
 	double h = -1;
@@ -12,7 +16,3 @@ double* high(double* first, double* last)
 	}
 	return high;
 }
-
-double* jack_high = high(jack_data, jack_data + jack_count);
-vector<double>& v = *jill_data;
-double* jill_high = high(&v[0], &v[0] + v.size());

@@ -1,4 +1,4 @@
-#ifndef TASK_20_00_07_STDAFX
+#ifndef TASK_20_00_07_STDAFX_H
 #include "Task_20_00_07_stdafx.h"
 #include "Task_20_00_07_Additional.h"
 #endif
