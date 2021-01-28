@@ -1,4 +1,4 @@
-#ifndef TASK_24_10_STDAFX
+#ifndef TASK_24_10_STDAFX_H
 #include "Task_24_10_stdafx.h"
 #include "Task_24_10_rand_int.h"
 #endif

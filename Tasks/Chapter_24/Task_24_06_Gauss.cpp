@@ -1,4 +1,4 @@
-#ifndef TASK_24_06_STDAFX
+#ifndef TASK_24_06_STDAFX_H
 #include "Task_24_06_stdafx.h"
 #include "Task_24_06_Gauss.h"
 #endif
