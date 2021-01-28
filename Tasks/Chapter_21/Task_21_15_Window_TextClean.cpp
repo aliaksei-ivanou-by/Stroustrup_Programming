@@ -1,4 +1,4 @@
-#ifndef TASK_21_15_STDAFX
+#ifndef TASK_21_15_STDAFX_H
 #include "Task_21_15_stdafx.h"
 #include "Task_21_15_Window_TextClean.h"
 #include "Task_21_15_TextClean.h"

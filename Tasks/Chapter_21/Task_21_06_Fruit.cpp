@@ -1,4 +1,4 @@
-#ifndef TASK_21_06_STDAFX
+#ifndef TASK_21_06_STDAFX_H
 #include "Task_21_06_stdafx.h"
 #include "Task_21_06_Fruit.h"
 #endif

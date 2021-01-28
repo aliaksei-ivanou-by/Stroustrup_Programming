@@ -1,4 +1,4 @@
-#ifndef TASK_21_00_03_STDAFX
+#ifndef TASK_21_00_03_STDAFX_H
 #include "Task_21_00_03_stdafx.h"
 #include "Task_21_00_03_Record.h"
 #endif

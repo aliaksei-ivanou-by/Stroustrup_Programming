@@ -1,4 +1,4 @@
-#ifndef TASK_21_00_05_STDAFX
+#ifndef TASK_21_00_05_STDAFX_H
 #include "Task_21_00_05_stdafx.h"
 #include "Task_21_00_05_weighted_value.h"
 #endif

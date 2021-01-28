@@ -1,4 +1,4 @@
-#ifndef TASK_21_09_STDAFX
+#ifndef TASK_21_09_STDAFX_H
 #include "Task_21_09_stdafx.h"
 #include "Task_21_09_Order.h"
 #endif
