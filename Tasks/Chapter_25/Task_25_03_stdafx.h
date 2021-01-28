@@ -7,8 +7,8 @@
 
 #endif
 
-template<class T>
-void print(T value)
-{
-	std::cout << std::setw(20) << value << '\t' << std::bitset<32>(value) << '\n';
-}
+#ifndef TASK_25_03_PRINT_H
+
+#include "Task_25_03_print.h"
+
+#endif

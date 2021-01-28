@@ -6,24 +6,8 @@
 
 #endif
 
-struct PPN
-{
-	unsigned int PFN : 22;
-	int : 3;
-	unsigned int CCA : 3;
-	bool nonreachable : 1;
-	bool dirty : 1;
-	bool valid : 1;
-	bool global : 1;
-};
+#ifndef TASK_25_11_PPN_H
 
-std::ostream& operator<<(std::ostream& OutputStream, const PPN& ppn)
-{
-	return OutputStream << "PPN: " << '\n' <<
-		"\tPFN: " << ppn.PFN << '\n' <<
-		"\tCCA: " << ppn.CCA << '\n' <<
-		"\tnonreachable: " << ppn.nonreachable << '\n' <<
-		"\tdirty: " << ppn.dirty << '\n' <<
-		"\tvalid: " << ppn.valid << '\n' <<
-		"\tglobal: " << ppn.global;
-}
+#include "Task_25_11_PPN.h"
+
+#endif
