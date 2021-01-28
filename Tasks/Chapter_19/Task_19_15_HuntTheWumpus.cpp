@@ -1,4 +1,4 @@
-#ifndef TASK_19_15_STDAFX
+#ifndef TASK_19_15_STDAFX_H
 #include "Task_19_15_stdafx.h"
 #include "Task_19_15_HuntTheWumpus.h"
 #include "Task_19_15_Window_HuntTheWumpus.h"
