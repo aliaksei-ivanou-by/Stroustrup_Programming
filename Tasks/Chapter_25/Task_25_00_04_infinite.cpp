@@ -1,4 +1,4 @@
-#ifndef TASK_25_00_04_STDAFX
+#ifndef TASK_25_00_04_STDAFX_H
 #include "Task_25_00_04_stdafx.h"
 #include "Task_25_00_04_infinite.h"
 #endif

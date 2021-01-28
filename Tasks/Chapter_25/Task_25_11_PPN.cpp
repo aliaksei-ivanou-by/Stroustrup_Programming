@@ -1,4 +1,4 @@
-#ifndef TASK_25_11_STDAFX
+#ifndef TASK_25_11_STDAFX_H
 #include "Task_25_11_stdafx.h"
 #include "Task_25_11_PPN.h"
 #endif
