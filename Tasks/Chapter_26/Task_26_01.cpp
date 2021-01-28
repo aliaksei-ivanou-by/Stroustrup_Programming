@@ -7,9 +7,12 @@ try
 {
 	std::string fileName{ "Task_26_01.txt" };
 	std::ifstream inputFileStream{ fileName };
+	if (!inputFileStream)
+	{
+		throw std::runtime_error("Can't open file");
+	}
 	unsigned int errors = test(inputFileStream);
 	std::cout << "Errors: " << errors << '\n';
-
 }
 catch (const std::exception& e)
 {

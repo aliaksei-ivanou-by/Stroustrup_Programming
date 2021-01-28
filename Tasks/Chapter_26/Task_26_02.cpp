@@ -9,6 +9,10 @@ try
 		std::string fileName{ "Task_26_02_double.txt" };
 		std::cout << fileName << '\n';
 		std::ifstream inputFileStream{ fileName };
+		if (!inputFileStream)
+		{
+			throw std::runtime_error("Can't open file");
+		}
 		unsigned int errors = test<double>(inputFileStream);
 		std::cout << "Errors: " << errors << '\n';
 	}
@@ -17,6 +21,10 @@ try
 		std::string fileName{ "Task_26_02_string.txt" };
 		std::cout << fileName << '\n';
 		std::ifstream inputFileStream{ fileName };
+		if (!inputFileStream)
+		{
+			throw std::runtime_error("Can't open file");
+		}
 		unsigned int errors = test<double>(inputFileStream);
 		std::cout << "Errors: " << errors << '\n';
 	}

@@ -9,7 +9,15 @@ try
 	std::string fileNameTest{ "Task_26_05_int_test.txt" };
 	std::cout << fileNameSeq << '\n';
 	std::ifstream inputFileStreamSeq{ fileNameSeq };
+	if (!inputFileStreamSeq)
+	{
+		throw std::runtime_error("Can't open file " + fileNameSeq);
+	}
 	std::ifstream inputFileStreamTest{ fileNameTest };
+	if (!inputFileStreamTest)
+	{
+		throw std::runtime_error("Can't open file " + fileNameTest);
+	}
 	unsigned int errors = test<int>(inputFileStreamSeq, inputFileStreamTest);
 	std::cout << "Errors: " << errors << '\n';
 }
