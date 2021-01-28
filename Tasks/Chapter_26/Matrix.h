@@ -1,5 +1,5 @@
-#ifndef MATRIX_LIB
-#define MATRIX_LIB
+#ifndef MATRIX_H
+#define MATRIX_H
 
 #include <string>
 #include <algorithm>

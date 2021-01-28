@@ -1,4 +1,4 @@
-#ifndef TASK_26_13_STDAFX
+#ifndef TASK_26_13_STDAFX_H
 #include "Task_26_13_stdafx.h"
 #include "Task_26_13_func.h"
 #endif
