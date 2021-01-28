@@ -1,4 +1,4 @@
-#ifndef TASK_23_06_STDAFX
+#ifndef TASK_23_06_STDAFX_H
 #include "Task_23_06_stdafx.h"
 #include "Task_23_06_findDate.h"
 #endif

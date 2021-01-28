@@ -1,4 +1,4 @@
-#ifndef TASK_23_12_STDAFX
+#ifndef TASK_23_12_STDAFX_H
 #include "Task_23_12_stdafx.h"
 #include "Task_23_12_dateToDefault.h"
 #endif

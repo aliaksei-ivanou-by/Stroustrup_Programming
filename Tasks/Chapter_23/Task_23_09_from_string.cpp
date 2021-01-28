@@ -1,4 +1,4 @@
-#ifndef TASK_23_09_STDAFX
+#ifndef TASK_23_09_STDAFX_H
 #include "Task_23_09_stdafx.h"
 #include "Task_23_09_from_string.h"
 #endif

@@ -1,4 +1,4 @@
-#ifndef TASK_23_07_STDAFX
+#ifndef TASK_23_07_STDAFX_H
 #include "Task_23_07_stdafx.h"
 #include "Task_23_07_findBankCards.h"
 #endif

@@ -1,4 +1,4 @@
-#ifndef TASK_23_05_STDAFX
+#ifndef TASK_23_05_STDAFX_H
 #include "Task_23_05_stdafx.h"
 #include "Task_23_05_Mail_file.h"
 #endif

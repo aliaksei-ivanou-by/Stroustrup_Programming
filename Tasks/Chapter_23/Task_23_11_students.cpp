@@ -1,4 +1,4 @@
-#ifndef TASK_23_11_STDAFX
+#ifndef TASK_23_11_STDAFX_H
 #include "Task_23_11_stdafx.h"
 #include "Task_23_11_students.h"
 #endif

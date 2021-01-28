@@ -1,8 +1,6 @@
-#include <regex>
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
+#ifndef TASK_23_00_03_STDAFX_H
+#include "Task_23_00_03_stdafx.h"
+#endif
 
 int main()
 try
