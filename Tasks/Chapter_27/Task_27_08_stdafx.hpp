@@ -5,7 +5,8 @@
 
 #endif
 
-int ascending(void const* a, void const* b)
-{
-	return (*(char*)a - *(char*)b);
-}
+#ifndef TASK_27_08_ASCENDING_HPP
+
+#include "Task_27_08_ascending.hpp"
+
+#endif

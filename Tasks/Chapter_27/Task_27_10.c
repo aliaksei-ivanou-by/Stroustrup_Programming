@@ -1,5 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef TASK_27_10_STDAFX_HPP
+#include "Task_27_10_stdafx.hpp"
+#endif
 
 int main()
 {

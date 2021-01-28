@@ -5,9 +5,9 @@
 
 #endif
 
-char* my_strcpy(char* p, const char* q)
-{
-	char* temp = p;
-	while (*p++ = *q++);
-	return temp;
-}
+#ifndef TASK_27_00_02_MY_STRCPY_HPP
+
+#include "Task_27_00_02_my_strcpy.hpp"
+
+#endif
+
