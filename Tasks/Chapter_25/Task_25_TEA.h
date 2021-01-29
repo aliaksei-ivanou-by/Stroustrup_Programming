@@ -1,8 +1,3 @@
-#ifndef TASK_25_12_STDAFX_H
-#include "Task_25_12_stdafx.h"
-#include "Task_25_12_TEA.h"
-#endif
-
 void encipher(
 	const unsigned long* const v,
 	unsigned long* const w,

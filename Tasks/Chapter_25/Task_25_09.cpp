@@ -1,6 +1,4 @@
-#ifndef TASK_25_09_STDAFX_H
-#include "Task_25_09_stdafx.h"
-#endif
+#include <iostream>
 
 using namespace std;
 int main()

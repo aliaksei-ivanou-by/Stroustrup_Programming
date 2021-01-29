@@ -1,18 +1,20 @@
 #include <iostream>
 
-void infinite()
-{
-	unsigned char max = 160;
-	for (signed char i = 0; i < max; ++i) // ranges of 'i' - [-128, 127]
-	{
-		std::cout << int(i) << '\n';
-	}
-}
-
 int main()
 try
 {
-	infinite();
+	{
+		while (true)
+		{
+			std::cout << "Hello, World!\n";
+		}
+	}
+	{
+		for (char i = 0; i < 128; ++i)
+		{
+			std::cout << "Hello, World!\n";
+		}
+	}
 }
 catch (const std::exception& e)
 {

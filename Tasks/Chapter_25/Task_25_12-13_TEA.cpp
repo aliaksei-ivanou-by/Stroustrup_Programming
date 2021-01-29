@@ -1,6 +1,7 @@
-#ifndef TASK_25_12_STDAFX_H
-#include "Task_25_12_stdafx.h"
-#endif
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include "Task_25_TEA.h"
 
 int main()
 try

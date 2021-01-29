@@ -1,6 +1,10 @@
-#ifndef TASK_25_00_05_STDAFX_H
-#include "Task_25_00_05_stdafx.h"
-#endif
+#include <iostream>
+
+template<typename T>
+void print(T value)
+{
+	std::cout << static_cast<int>(value) << '\t';
+}
 
 int main()
 try

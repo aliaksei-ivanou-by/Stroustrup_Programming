@@ -1,6 +1,7 @@
-#ifndef TASK_25_00_07_STDAFX_H
-#include "Task_25_00_07_stdafx.h"
-#endif
+#include <iostream>
+#include <iomanip>
+#include <bitset>
+#include <vector>
 
 int main()
 try
