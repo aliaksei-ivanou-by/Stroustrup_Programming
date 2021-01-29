@@ -1,9 +1,6 @@
-#ifndef TASK_26_01_MYBINARYSEARCH_H
-#define TASK_26_01_MYBINARYSEARCH_H
+#pragma once
 
-#ifndef TASK_26_01_STDAFX_H
-#include "Task_26_01_stdafx.h"
-#endif
+#include <iostream>
 
 template<typename Iter, typename T>
 bool myBinarySearch(Iter first, Iter last, const T& val)
@@ -53,15 +50,74 @@ bool myBinarySearch(Iter first, Iter last, const T& val)
 	return false;
 }
 
+template<typename T>
+struct CmpLess
+{
+	bool operator()(const T& leftValue, const T& rightValue)
+	{
+		return leftValue < rightValue;
+	}
+};
+
+template<typename Iter, typename T, typename Compare>
+bool myBinarySearch(Iter first, Iter last, const T& val, Compare cmp)
+{
+	if (first == last)
+	{
+		return false;
+	}
+	if (cmp(*(--last), val))
+	{
+		return false;
+	}
+	Iter low = first;
+	Iter high = last;
+	while (true)
+	{
+		if (low == high)
+		{
+			return false;
+		}
+		int distance = 0;
+		Iter f = low;
+		while (f != high)
+		{
+			++f;
+			++distance;
+		}
+		Iter lowTemp = low;
+		std::advance(lowTemp, distance / 2);
+		Iter mid = lowTemp;
+		T guess = *mid;
+		if (!cmp(guess, val) && !cmp(val, guess))
+		{
+			return true;
+		}
+		if (cmp(val, guess))
+		{
+			--mid;
+			high = mid;
+		}
+		else
+		{
+			++mid;
+			low = mid;
+		}
+	}
+	return false;
+}
+
+template<typename T>
 struct Test
 {
 	std::string label;
-	int val;
-	std::vector<int> seq;
+	T val;
+	std::vector<T> seq;
 	bool res;
 };
 
-std::istream& operator>>(std::istream& inputStream, Test& t)
+template<typename T>
+std::istream& operator>>(std::istream& inputStream, Test<T>& test)
 {
 	if (!inputStream)
 	{
@@ -70,15 +126,15 @@ std::istream& operator>>(std::istream& inputStream, Test& t)
 	char ch1;
 	char ch2;
 	std::string label;
-	int val;
+	T val;
 	inputStream >> ch1 >> label >> val >> ch2;
 	if (!inputStream || ch1 != '{' || ch2 != '{')
 	{
 		return inputStream;
 	}
-	std::vector<int> seq;
+	std::vector<T> seq;
 	bool res;
-	int seqValue;
+	T seqValue;
 	while (inputStream >> seqValue)
 	{
 		seq.push_back(seqValue);
@@ -96,19 +152,20 @@ std::istream& operator>>(std::istream& inputStream, Test& t)
 	{
 		return inputStream;
 	}
-	t.label = label;
-	t.val = val;
-	t.seq = seq;
-	t.res = res;
+	test.label = label;
+	test.val = val;
+	test.seq = seq;
+	test.res = res;
 	return inputStream;
 }
 
+template<typename T>
 unsigned int test(std::ifstream& inputStream)
 {
-	unsigned errors = 0;
-	for (Test t; inputStream >> t; )
+	unsigned int errors = 0;
+	for (Test<T> t; inputStream >> t; )
 	{
-		bool r = myBinarySearch(t.seq.begin(), t.seq.end(), t.val);
+		bool r = myBinarySearch(t.seq.begin(), t.seq.end(), t.val, CmpLess<T>());
 		if (r != t.res)
 		{
 			std::cout << "failure: test " << t.label <<
@@ -120,5 +177,3 @@ unsigned int test(std::ifstream& inputStream)
 	}
 	return errors;
 }
-
-#endif
