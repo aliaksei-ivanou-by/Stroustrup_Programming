@@ -1,3 +1,7 @@
+#pragma once
+#include <iostream>
+#include <fstream>
+
 void encipher(
 	const unsigned long* const v,
 	unsigned long* const w,
