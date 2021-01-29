@@ -1,3 +1,8 @@
+#pragma once
+#include <iostream>
+#include "Matrix.h"
+#include "MatrixIO.h"
+
 Numeric_lib::Matrix<double, 1> random_Vector(
 	Numeric_lib::Index n)
 {

@@ -1,6 +1,4 @@
-#ifndef MATRIX_H
-#define MATRIX_H
-
+#pragma once
 #include <string>
 #include <algorithm>
 
@@ -1324,5 +1322,3 @@ namespace Numeric_lib
 		return r ^= c;
 	}
 }
-
-#endif
