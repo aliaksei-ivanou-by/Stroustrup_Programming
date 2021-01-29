@@ -1,6 +1,8 @@
+#pragma once
 #include <list>
+#include <vector>
 
-class Line;
+using Line = std::vector<char>;
 
 struct Document
 {

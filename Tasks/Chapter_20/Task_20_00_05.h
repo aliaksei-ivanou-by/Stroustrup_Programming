@@ -1,3 +1,6 @@
+#pragma once
+#include <iostream>
+
 template<class A>
 class allocator
 {
@@ -170,7 +173,7 @@ public:
 		}
 		sz = newsize;
 	}
-	void push_front(const T& element)
+	void push_front(const T& val)
 	{
 		if (space == 0)
 		{
@@ -185,7 +188,7 @@ public:
 		}
 		for (int i = sz; i > 0; --i)
 		{
-			alloc.construct(&elem[i], elem[i - 1];
+			alloc.construct(&elem[i], elem[i - 1]);
 			alloc.destroy(&elem[i - 1]);
 		}
 		alloc.construct(&elem[0], val);
