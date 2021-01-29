@@ -1,3 +1,12 @@
+#pragma once
+#include <iostream>
+#include <map>
+#include <iomanip>
+#include <regex>
+#include <numeric>
+#include <fstream>
+#include <sstream>
+
 struct bad_from_string : std::bad_cast
 {
 	const char* what() const

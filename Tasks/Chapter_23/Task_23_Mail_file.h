@@ -1,3 +1,10 @@
+#pragma once
+#include <iostream>
+#include <vector>
+#include <regex>
+#include <string>
+#include <fstream>
+
 using Line_iter = std::vector<std::string>::const_iterator;
 
 class Message
