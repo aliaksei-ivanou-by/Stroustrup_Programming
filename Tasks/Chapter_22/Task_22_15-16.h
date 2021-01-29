@@ -1,3 +1,9 @@
+#pragma once
+#include <iostream>
+#include <algorithm>
+#include "GUI/Simple_window.h"
+#include "GUI/Graph.h"
+
 constexpr int maxX = 600;
 constexpr int maxY = 600;
 constexpr int offsetX = 50;
