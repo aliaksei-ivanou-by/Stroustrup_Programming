@@ -1,3 +1,9 @@
+#pragma once
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+
 void fileOpen(std::ifstream& inputFileStream, const std::string& fileName)
 {
 	inputFileStream = std::ifstream(fileName);
