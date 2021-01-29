@@ -1,12 +1,19 @@
-#ifndef TASK_22_16_STDAFX_H
-#include "Task_22_16_stdafx.h"
-#endif
+#include <iostream>
+#include <fstream>
+#include <map>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <iomanip>
+#include "GUI/Simple_window.h"
+#include "GUI/Graph.h"
+#include "Task_22_15-16.h"
 
 int main()
 try
 {
 	std::string fileName = "Task_22_16.txt";
-	std::map<std::string, ProgrammingLanguages> data = fileOpen(fileName);
+	std::map<std::string, ProgrammingLanguages> data = fileOpenProgrammingLanguages(fileName);
 	std::pair<int, int> dataYearRange = getYearRange(data);
 
 	double delta = (dataYearRange.second - dataYearRange.first) / static_cast<double>(nTicks);
