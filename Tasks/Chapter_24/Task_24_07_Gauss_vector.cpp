@@ -1,7 +1,9 @@
-#ifndef TASK_24_07_STDAFX_H
-#include "Task_24_07_stdafx.h"
-#include "Task_24_07_Gauss.h"
-#endif
+#include <iostream>
+#include <random>
+#include <numeric>
+
+using Matrix = std::vector<std::vector<double>>;
+using Vector = std::vector<double>;
 
 struct Elim_failure : std::domain_error
 {
@@ -46,44 +48,26 @@ Matrix random_matrix(int n)
 	return m;
 }
 
-void solve_random_system_classical(int n)
+std::ostream& operator<<(std::ostream& outputStream, const Vector& vector)
 {
-	Matrix A = random_matrix(n);
-	Vector b = random_Vector(n);
-	std::cout << "A = " << A << '\n';
-	std::cout << "b = " << b << '\n';
-	try
+	outputStream << "{ ";
+	for (int i = 0; i < vector.size(); ++i)
 	{
-		Vector x = classical_gaussian_elimination_loop(A, b);
-		std::cout << "classical elim solution loop is x = " << x << '\n';
-		Vector v = A * x;
-		std::cout << " A * x = " << v << '\n';
-		std::cout << '\n';
+		outputStream << vector[i] << ' ';
 	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	outputStream << '}';
+	return outputStream;
 }
 
-void solve_random_system_pivotal(int n)
+std::ostream& operator<<(std::ostream& outputStream, const Matrix& matrix)
 {
-	Matrix A = random_matrix(n);
-	Vector b = random_Vector(n);
-	std::cout << "A = " << A << '\n';
-	std::cout << "b = " << b << '\n';
-	try
+	outputStream << "{\n";
+	for (int i = 0; i < matrix.size(); ++i)
 	{
-		Vector x = pivotal_elimination_loop(A, b);
-		std::cout << "pivotal elim solution loop is x = " << x << '\n';
-		Vector v = A * x;
-		std::cout << " A * x = " << v << '\n';
-		std::cout << '\n';
+		outputStream << matrix[i] << '\n';
 	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	outputStream << '}';
+	return outputStream;
 }
 
 void classical_elimination_loop(Matrix& A, Vector& b)
@@ -178,24 +162,63 @@ Vector pivotal_elimination_loop(Matrix A, Vector b)
 	return back_substitution_loop(A, b);
 }
 
-std::ostream& operator<<(std::ostream& outputStream, const Vector& vector)
+void solve_random_system_classical(int n)
 {
-	outputStream << "{ ";
-	for (int i = 0; i < vector.size(); ++i)
+	Matrix A = random_matrix(n);
+	Vector b = random_Vector(n);
+	std::cout << "A = " << A << '\n';
+	std::cout << "b = " << b << '\n';
+	try
 	{
-		outputStream << vector[i] << ' ';
+		Vector x = classical_gaussian_elimination_loop(A, b);
+		std::cout << "classical elim solution loop is x = " << x << '\n';
+		Vector v = A * x;
+		std::cout << " A * x = " << v << '\n';
+		std::cout << '\n';
 	}
-	outputStream << '}';
-	return outputStream;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
-std::ostream& operator<<(std::ostream& outputStream, const Matrix& matrix)
+void solve_random_system_pivotal(int n)
 {
-	outputStream << "{\n";
-	for (int i = 0; i < matrix.size(); ++i)
+	Matrix A = random_matrix(n);
+	Vector b = random_Vector(n);
+	std::cout << "A = " << A << '\n';
+	std::cout << "b = " << b << '\n';
+	try
 	{
-		outputStream << matrix[i] << '\n';
+		Vector x = pivotal_elimination_loop(A, b);
+		std::cout << "pivotal elim solution loop is x = " << x << '\n';
+		Vector v = A * x;
+		std::cout << " A * x = " << v << '\n';
+		std::cout << '\n';
 	}
-	outputStream << '}';
-	return outputStream;
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
+
+int main()
+try
+{
+	solve_random_system_classical(3);
+	solve_random_system_classical(4);
+	solve_random_system_classical(5);
+	
+	solve_random_system_pivotal(3);
+	solve_random_system_pivotal(4);
+	solve_random_system_pivotal(5);
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
 }

@@ -1,6 +1,12 @@
-#ifndef TASK_24_12_STDAFX_H
-#include "Task_24_12_stdafx.h"
-#endif
+#include <iostream>
+#include "Matrix.h"
+#include "MatrixIO.h"
+#include <random>
+#include <iomanip>
+#include "Task_24_Matrix_Additional.h"
+
+using Matrix = Numeric_lib::Matrix<double, 2>;
+using Vector = Numeric_lib::Matrix<double, 1>;
 
 int main()
 try

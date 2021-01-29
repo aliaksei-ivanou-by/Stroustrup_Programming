@@ -1,6 +1,12 @@
-#ifndef TASK_24_10_STDAFX_H
-#include "Task_24_10_stdafx.h"
-#endif
+#include <iostream>
+#include <random>
+
+int rand_int(int max)
+{
+	static std::default_random_engine ran;
+	int result = std::uniform_int_distribution<>{ 0, max }(ran);
+	return result;
+}
 
 int main()
 try

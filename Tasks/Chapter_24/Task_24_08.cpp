@@ -1,6 +1,10 @@
-#ifndef TASK_24_08_STDAFX_H
-#include "Task_24_08_stdafx.h"
-#endif
+#include <iostream>
+#include <random>
+#include <numeric>
+#include <iomanip>
+#include "Matrix.h"
+#include "MatrixIO.h"
+#include "Task_24_Matrix_Additional.h"
 
 int main()
 try

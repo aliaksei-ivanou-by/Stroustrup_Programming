@@ -1,6 +1,5 @@
-#ifndef TASK_24_00_01_STDAFX_H
-#include "Task_24_00_01_stdafx.h"
-#endif
+#include <iostream>
+#include <iomanip>
 
 int main()
 try

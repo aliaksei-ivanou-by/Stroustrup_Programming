@@ -1,6 +1,27 @@
-#ifndef TASK_24_11_STDAFX_H
-#include "Task_24_11_stdafx.h"
-#endif
+#include <iostream>
+#include "Matrix.h"
+#include "MatrixIO.h"
+#include <random>
+#include <iomanip>
+#include "Task_24_Matrix_Additional.h"
+
+using Matrix = Numeric_lib::Matrix<double, 2>;
+
+/*
+in Matrix.h :
+void swap_columns(Index i, Index j)
+{
+	if (i == j)
+	{
+		return;
+	}
+	Index max = dim1();
+	for (Index k = 0; k < max; ++k)
+	{
+		std::swap((*this)(k, i), (*this)(k, j));
+	}
+}
+*/
 
 int main()
 try
