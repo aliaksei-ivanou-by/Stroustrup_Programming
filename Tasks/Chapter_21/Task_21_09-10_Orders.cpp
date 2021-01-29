@@ -1,14 +1,21 @@
-#ifndef TASK_21_09_STDAFX_H
-#include "Task_21_09_stdafx.h"
-#endif
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <algorithm>
+#include <list>
+#include <set>
+#include <numeric>
+#include "Task_21_09-10-11-12_Order.h"
 
 int main(int argc, char** argv)
 try
 {
 	// FILE 1
 	std::vector<Order> orders1;
-	std::string fileName1 = "Task_21_09_File1.txt";
-	std::string fileName1Result = "Task_21_09_File1_result.txt";
+	std::string fileName1 = "Task_21_09-10_File1.txt";
+	std::string fileName1Result = "Task_21_09-10_File1_result.txt";
 	std::ifstream fileInputStream1(fileName1.c_str());
 	if (!fileInputStream1)
 	{
@@ -42,8 +49,8 @@ try
 
 	// FILE 2
 	std::list<Order> orders2;
-	std::string fileName2 = "Task_21_09_File2.txt";
-	std::string fileName2Result = "Task_21_09_File2_result.txt";
+	std::string fileName2 = "Task_21_09-10_File2.txt";
+	std::string fileName2Result = "Task_21_09-10_File2_result.txt";
 	std::ifstream fileInputStream2(fileName2.c_str());
 	if (!fileInputStream2)
 	{
@@ -76,7 +83,7 @@ try
 	fileOutputStream2.close();
 
 	// FILE 3
-	std::string fileName3Result = "Task_21_09_File3_result.txt";
+	std::string fileName3Result = "Task_21_09-10_File3_result.txt";
 	std::ofstream fileOutputStream3(fileName3Result.c_str());
 	std::vector<Order> orders2Vector(orders2.begin(), orders2.end());
 	std::sort(orders2Vector.begin(), orders2Vector.end());
@@ -95,7 +102,7 @@ try
 
 	// FILE 4
 	std::set<Order> mySet;
-	std::string fileName4Result = "Task_21_09_File4_result.txt";
+	std::string fileName4Result = "Task_21_09-10_File4_result.txt";
 	std::ofstream fileOutputStream4(fileName4Result.c_str());
 	for (auto i = ordersMerge.begin(); i != ordersMerge.end(); ++i)
 	{
@@ -107,6 +114,17 @@ try
 	}
 	fileOutputStream4.close();
 
+	// Sum of ordersMerge
+	double totalSum = 0;
+	for (auto i = ordersMerge.begin(); i != ordersMerge.end(); ++i)
+	{
+		totalSum = std::inner_product(i->getClientPurchasesBegin(), i->getClientPurchasesEnd(),
+			i->getClientPurchasesBegin(),
+			totalSum,
+			std::plus<double>(),
+			[&ordersMerge](Purchase a, Purchase b) { return a.getPurchaseCount() * b.getPurchaseUnitPrice(); });
+	}
+	std::cout << "Total sum of ordersMerge: " << totalSum << '\n';
 }
 catch (const std::exception& e)
 {

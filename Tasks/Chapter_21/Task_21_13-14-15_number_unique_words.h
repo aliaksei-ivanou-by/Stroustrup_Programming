@@ -1,8 +1,3 @@
-#ifndef TASK_21_15_STDAFX_H
-#include "Task_21_15_stdafx.h"
-#include "Task_21_15_TextClean.h"
-#endif
-
 void fileOpen(std::ifstream& inputFileStream, const std::string& fileName)
 {
 	inputFileStream = std::ifstream(fileName);
@@ -128,6 +123,10 @@ std::map<std::string, int> textClean(const std::string& fileName)
 {
 	std::ifstream inputFileStream;
 	fileOpen(inputFileStream, fileName);
+	if (!inputFileStream)
+	{
+		throw std::runtime_error("Can't open file");
+	}
 
 	char ch;
 	std::ostringstream outputStringStream;

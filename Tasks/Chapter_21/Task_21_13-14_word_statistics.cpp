@@ -1,12 +1,15 @@
-#ifndef TASK_21_14_STDAFX_H
-#include "Task_21_14_stdafx.h"
-#endif
+#include <iostream>
+#include <string>
+#include <map>
+#include <fstream>
+#include <sstream>
+#include "Task_21_13-14-15_number_unique_words.h"
 
 int main(int argc, char** argv)
 try
 {
 	unsigned long long int sumString = 0;
-	const std::string fileName = "Task_21_14.txt";
+	const std::string fileName = "Task_21_13-14-15.txt";
 	std::map<std::string, int> words = textClean(fileName);
 	for (auto i = words.begin(); i != words.end(); ++i)
 	{

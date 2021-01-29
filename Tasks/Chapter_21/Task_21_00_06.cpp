@@ -1,6 +1,7 @@
-#ifndef TASK_21_00_06_STDAFX_H
-#include "Task_21_00_06_stdafx.h"
-#endif
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <algorithm>
 
 int main()
 try
