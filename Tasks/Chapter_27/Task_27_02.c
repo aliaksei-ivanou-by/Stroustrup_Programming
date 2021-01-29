@@ -1,6 +1,7 @@
-﻿#ifndef TASK_27_02_STDAFX_HPP
-#include "Task_27_02_stdafx.hpp"
-#endif
+﻿#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include "Task_27_List.hpp"
 
 int main()
 {

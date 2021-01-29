@@ -1,7 +1,19 @@
-#ifndef TASK_27_02_STDAFX_HPP
-#include "Task_27_02_stdafx.hpp"
-#include "Task_27_02_List.hpp"
-#endif
+#pragma once
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+
+struct Link
+{
+	struct Link* pre;
+	struct Link* suc;
+};
+
+struct List
+{
+	struct Link* first;
+	struct Link* last;
+};
 
 void init(struct List* lst)
 {
@@ -58,6 +70,57 @@ void push_back(struct List* lst, struct Link* p)
 	}
 }
 
+void push_front(struct List* lst, struct Link* p)
+{
+	assert(lst);
+	{
+		struct Link* first = lst->first;
+		if (first)
+		{
+			first->pre = p;
+			p->suc = first;
+		}
+		else
+		{
+			lst->last = p;
+			p->suc = 0;
+		}
+		lst->first = p;
+		p->pre = 0;
+	}
+}
+
+void insert(struct List* lst, struct Link* p, struct Link* q)
+{
+	assert(lst);
+	{
+		q->suc = p;
+		if (p == lst->first)
+		{
+			q->pre = 0;
+			lst->first = q;
+		}
+		else if (p == lst->last)
+		{
+			if (p->pre)
+			{
+				q->pre = p->pre;
+				p->pre->suc = q;
+			}
+			else
+			{
+				q->suc = 0;
+			}
+		}
+		else
+		{
+			q->pre = p->pre;
+			p->pre->suc = q;
+		}
+		p->pre = q;
+	}
+}
+
 struct Link* erase(struct List* lst, struct Link* p)
 {
 	assert(lst);
@@ -103,13 +166,6 @@ struct Link* erase(struct List* lst, struct Link* p)
 	}
 }
 
-struct Name* make_name(char* n)
-{
-	struct Name* p = (struct Name*)malloc(sizeof(struct Name));
-	p->n = n;
-	return p;
-}
-
 struct Link* advance(struct Link* p, int n)
 {
 	struct Link* curr = p;
@@ -130,24 +186,17 @@ struct Link* advance(struct Link* p, int n)
 	return curr;
 }
 
-void push_front(struct List* lst, struct Link* p)
+struct Name
 {
-	assert(lst);
-	{
-		struct Link* first = lst->first;
-		if (first)
-		{
-			first->pre = p;
-			p->suc = first;
-		}
-		else
-		{
-			lst->last = p;
-			p->suc = 0;
-		}
-		lst->first = p;
-		p->pre = 0;
-	}
+	struct Link lnk;
+	char* n;
+};
+
+struct Name* make_name(char* n)
+{
+	struct Name* p = (struct Name*)malloc(sizeof(struct Name));
+	p->n = n;
+	return p;
 }
 
 void print_names(struct List* lst)
@@ -162,36 +211,5 @@ void print_names(struct List* lst)
 			printf("Name: %s\n", n);
 			curr = curr->suc;
 		}
-	}
-}
-
-void insert(struct List* lst, struct Link* p, struct Link* q)
-{
-	assert(lst);
-	{
-		q->suc = p;
-		if (p == lst->first)
-		{
-			q->pre = 0;
-			lst->first = q;
-		}
-		else if (p == lst->last)
-		{
-			if (p->pre)
-			{
-				q->pre = p->pre;
-				p->pre->suc = q;
-			}
-			else
-			{
-				q->suc = 0;
-			}
-		}
-		else
-		{
-			q->pre = p->pre;
-			p->pre->suc = q;
-		}
-		p->pre = q;
 	}
 }

@@ -1,7 +1,4 @@
-#ifndef TASK_27_00_01_STDAFX_HPP
-#include "Task_27_00_01_stdafx.hpp"
-#include "Task_27_00_01_cat.hpp"
-#endif
+﻿#include <stdlib.h>
 
 char* cat(const char* id, const char* addr)
 {
@@ -19,4 +16,13 @@ char* cat(const char* id, const char* addr)
 	strcpy(res + idLength + 1, addr); /* NOT res + idLength + 2 */
 	res[sz - 1] = 0; /* end of char* */
 	return res;
+}
+
+
+int main()
+{
+	char* id = "aliaksei.ivanou.by";
+	char* domen = "icloud.com";
+	char* email = cat(id, domen);
+	printf("%s\n", email);
 }
