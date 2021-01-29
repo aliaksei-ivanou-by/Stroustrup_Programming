@@ -1,6 +1,10 @@
-#ifndef TASK_23_01_STDAFX_H
-#include "Task_23_01_stdafx.h"
-#endif
+#include <string>
+#include <vector>
+#include <map>
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include "Task_23_Mail_file.h"
 
 int main()
 try
