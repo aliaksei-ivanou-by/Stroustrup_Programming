@@ -1,12 +1,7 @@
-#ifndef TASK_20_18_VECTOR_H
-#define TASK_20_18_VECTOR_H
-
-#ifndef TASK_20_18_STDAFX_H
-#include "Task_20_18_stdafx.h"
-#endif
+#include <iostream>
 
 template<class T>
-class vector
+class my_vector
 {
 private:
 	size_t sz;
@@ -14,12 +9,12 @@ private:
 	size_t space;
 public:
 	class iterator;
-	vector() :
+	my_vector() :
 		sz{ 0 },
 		elem{ nullptr },
 		space{ 0 }
 	{}
-	explicit vector(size_t n) :
+	explicit my_vector(size_t n) :
 		sz{ n },
 		elem{ std::make_unique<T[]>(n).release() },
 		space{ n }
@@ -29,7 +24,7 @@ public:
 			*i = T();
 		}
 	}
-	vector(const vector& v) :
+	my_vector(const my_vector& v) :
 		sz{ v.sz },
 		elem{ std::make_unique<T[]>(v.sz).release() },
 		space{ v.sz }
@@ -71,14 +66,14 @@ public:
 };
 
 template<typename T>
-class vector<T>::iterator
+class my_vector<T>::iterator
 {
 private:
 	T* curr;
 	T* first;
 	T* last;
 public:
-	iterator(T* p, T* elem, size_t sz):
+	iterator(T* p, T* elem, size_t sz) :
 		curr{ p },
 		first{ elem },
 		last{ elem + sz }
@@ -137,4 +132,73 @@ public:
 	}
 };
 
-#endif
+int main(int argc, char** argv)
+try
+{
+	int n = 10;
+	my_vector<int> myVector(n);
+	for (int i = 0; i < n; ++i)
+	{
+		myVector[i] = i;
+	}
+
+	std::cout << "myVector size:\t" << myVector.size() << '\n';
+
+	std::cout << "myVector" << '\t';
+	for (const auto& i : myVector)
+	{
+		std::cout << i << ' ';
+	}
+	std::cout << '\n';
+
+	try
+	{
+		auto myIterator = myVector.begin();
+		--myIterator;
+	}
+	catch (std::out_of_range)
+	{
+		std::cout << "Decrement from begin.\tError - Out of range\n";
+	}
+
+	try
+	{
+		auto myIterator = myVector.end();
+		++myIterator;
+	}
+	catch (std::out_of_range)
+	{
+		std::cout << "Decrement from end.\tError - Out of range\n";
+	}
+
+	try
+	{
+		auto myIterator = myVector.begin();
+		auto temp = myIterator[23];
+		std::cout << temp;
+	}
+	catch (std::out_of_range)
+	{
+		std::cout << "Out of range access.\tError - Out of range\n";
+	}
+
+	try
+	{
+		auto myIterator = myVector.begin();
+		auto temp = myIterator[5];
+		std::cout << *temp;
+	}
+	catch (std::out_of_range)
+	{
+		std::cout << "Out of range access.\tError - Out of range\n";
+	}
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}

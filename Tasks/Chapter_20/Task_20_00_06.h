@@ -1,6 +1,3 @@
-#ifndef TASK_20_00_06_H
-#define TASK_20_00_06_H
-
 #include <list>
 
 class Line;
@@ -8,7 +5,16 @@ class Line;
 struct Document
 {
 	std::list<Line> line;
-	void erase_line(int n);
+	void erase_line(int n)
+	{
+		if (n < 0 || (*this).line.size() - 1 <= n)
+		{
+			return;
+		}
+		auto p = (*this).line.begin();
+		advance(p, n);
+		(*this).line.erase(p);
+	}
 };
 
 template<typename Iter>
@@ -25,5 +31,3 @@ void advance(Iter& p, int n)
 		++n;
 	}
 }
-
-#endif

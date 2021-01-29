@@ -1,9 +1,4 @@
-#ifndef TASK_20_14_MY_SLIST_H
-#define TASK_20_14_MY_SLIST_H
-
-#ifndef TASK_20_14_STDAFX_H
-#include "Task_20_14_stdafx.h"
-#endif
+#include <iostream>
 
 template<class T>
 T high(T first, T last)
@@ -34,16 +29,16 @@ public:
 };
 
 template<class Elem>
-class my_slist
+class my_list_ptr
 {
 private:
 	Link<Elem>* first;
 public:
 	class iterator;
-	my_slist() :
+	my_list_ptr() :
 		first{ nullptr }
 	{}
-	my_slist(int n, Elem elem = Elem()) :
+	my_list_ptr(int n, Elem elem = Elem()) :
 		first{ nullptr }
 	{
 		for (int i = 0; i < n; ++i)
@@ -55,7 +50,7 @@ public:
 			}
 		}
 	}
-	~my_slist()
+	~my_list_ptr()
 	{
 		while (first)
 		{
@@ -113,7 +108,7 @@ public:
 };
 
 template<class Elem>
-class my_slist<Elem>::iterator
+class my_list_ptr<Elem>::iterator
 {
 private:
 	Link<Elem>* curr;
@@ -153,4 +148,32 @@ public:
 	}
 };
 
-#endif
+int main()
+try
+{
+	my_list_ptr<int> list1;
+	std::cout << "sizeof(list):\t" << sizeof(list1) << '\n';
+	my_list_ptr<int>* list2;
+	std::cout << "sizeof(list*):\t" << sizeof(list2) << '\n';
+
+	my_list_ptr<int> list3;
+	list3.push_front(1);
+	list3.push_front(2);
+	list3.push_front(3);
+	list3.push_back(4);
+	list3.push_back(5);
+	list3.push_back(6);
+	for (auto i = list3.begin(); i != list3.end(); ++i)
+	{
+		std::cout << *i << ' ';
+	}
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}

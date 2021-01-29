@@ -1,9 +1,4 @@
-#ifndef TASK_20_19_MY_LIST_H
-#define TASK_20_19_MY_LIST_H
-
-#ifndef TASK_20_19_STDAFX_H
-#include "Task_20_19_stdafx.h"
-#endif
+#include <iostream>
 
 template<class T>
 T high(T first, T last)
@@ -34,31 +29,28 @@ public:
 };
 
 template<class Elem>
-class my_list
+class my_slist
 {
 private:
 	Link<Elem>* first;
-	Link<Elem>* last;
-	int sz;
 public:
 	class iterator;
-	my_list() :
-		first{ new Link<Elem>() },
-		last{ first },
-		sz{}
+	my_slist() :
+		first{ nullptr }
 	{}
-	my_list(int n, Elem elem = Elem()) :
-		first{ new Link<Elem>() },
-		last{ first },
-		sz{ n }
+	my_slist(int n, Elem elem = Elem()) :
+		first{ nullptr }
 	{
 		for (int i = 0; i < n; ++i)
 		{
 			first = new Link<Elem>(elem, nullptr, first);
-			first->succ->prev = first;
+			if (first->succ != nullptr)
+			{
+				first->succ->prev = first;
+			}
 		}
 	}
-	~my_list()
+	~my_slist()
 	{
 		while (first)
 		{
@@ -67,6 +59,11 @@ public:
 	}
 	int size()
 	{
+		int sz = 0;
+		for (iterator i = begin(); i != end(); ++i)
+		{
+			++sz;
+		}
 		return sz;
 	}
 	iterator begin()
@@ -79,58 +76,24 @@ public:
 	}
 	iterator end()
 	{
-		return iterator(last);
+		return iterator(nullptr);
 	}
 	const iterator end() const
 	{
-		return iterator(last);
-	}
-	iterator insert(iterator p, const Elem& v)
-	{
-		Link<Elem>* k = new Link<Elem>(v, p->prev);
-		if (p->succ)
-		{
-			k->succ = p->succ->prev;
-		}
-		else
-		{
-			k->succ = last;
-		}
-		p->prev = k;
-		if (k->prev)
-		{
-			k->prev->succ = k;
-		}
-		else
-		{
-			first = k;
-		}
-		++sz;
-		return iterator(k);
+		return iterator(nullptr);
 	}
 	void push_back(const Elem& v)
 	{
-		Link<Elem>* p = new Link<Elem>(v);
-		if (last == first)
+		iterator p = begin();
+		while (p->succ)
 		{
-			first = p;
+			++p;
 		}
-		else
-		{
-			last->prev->succ = p;
-		}
-		p->prev = last->prev;
-		p->succ = last;
-		last->prev = p;
-		++sz;
+		p->succ = new Link<Elem>(v, p.ptr());
 	}
 	void push_front(const Elem& v)
 	{
-		Link<Elem>* p = new Link<Elem>(v);
-		p->succ = first;
-		first->prev = p;
-		first = p;
-		++sz;
+		first = new Link<Elem>(v, nullptr, first);
 	}
 	void pop_front()
 	{
@@ -142,14 +105,10 @@ public:
 	{
 		return first->val;
 	}
-	Elem& back()
-	{
-		return last->prev->val;
-	}
 };
 
 template<class Elem>
-class my_list<Elem>::iterator
+class my_slist<Elem>::iterator
 {
 private:
 	Link<Elem>* curr;
@@ -159,19 +118,11 @@ public:
 	{}
 	iterator& operator++()
 	{
-		if (curr->succ == nullptr)
-		{
-			throw std::out_of_range("bad iterator _ out of range");
-		}
 		curr = curr->succ;
 		return *this;
 	}
 	iterator& operator--()
 	{
-		if (curr->prev == nullptr)
-		{
-			throw std::out_of_range("bad iterator _ out of range");
-		}
 		curr = curr->prev;
 		return *this;
 	}
@@ -197,4 +148,24 @@ public:
 	}
 };
 
-#endif
+int main()
+try
+{
+	my_slist<int> myList;
+	int number;
+	while (std::cin >> number)
+	{
+		myList.push_front(number);
+	}
+	auto p = high(myList.begin(), myList.end());
+	std::cout << "High value of myList is " << *p;
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}
