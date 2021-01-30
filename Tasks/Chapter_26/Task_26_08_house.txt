@@ -1,0 +1,6 @@
+Rectangle(Point(100, 200), 500, 400)
+Line(Point(100, 200), Point(350, 100))
+Line(Point(350, 100), Point(600, 200))
+Rectangle(Point(300, 400), 100, 200)
+Rectangle(Point(150, 400), 100, 100)
+Rectangle(Point(450, 400), 100, 100)
