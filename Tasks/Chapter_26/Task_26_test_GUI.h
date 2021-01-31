@@ -2,13 +2,20 @@
 #include <iostream>
 #include "GUI/Graph.h"
 
+enum class ShapeType
+{
+	Circle,
+	Rectangle,
+	Line
+};
+
 std::istream& operator>>(std::istream& inputStream, Point& point)
 {
 	char ch;
 	std::string point_str;
 	while (inputStream >> ch)
 	{
-		if (ch == '(' || ch == '{')
+		if (ch == '(')
 		{
 			break;
 		}
@@ -95,7 +102,7 @@ Shape* getShape(std::istream& inputStream)
 	char ch;
 	while (inputStream >> ch)
 	{
-		if (ch == '(' || ch == '{')
+		if (ch == '(')
 		{
 			inputStream.unget();
 			break;
