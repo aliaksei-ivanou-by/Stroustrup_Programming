@@ -1,96 +1,102 @@
 #pragma once
 #include <stdlib.h>
 
-struct Table
+struct Pair
 {
 	const char* name;
 	int value;
 };
 
-int cap;
-int sz;
-struct Table* table;
-
-int size()
+struct Pair* pair(const char* name, int value)
 {
-	return sz;
-}
-
-void set_size(int sz_new)
-{
-	sz = sz_new;
-}
-
-int capacity()
-{
-	return cap;
-}
-
-void set_capacity(int cap_new)
-{
-	cap = cap_new;
-}
-
-int cmp_find(const char* name, const struct Table* rightTable)
-{
-	return strcmp(name, rightTable->name);
-}
-
-int cmp_sort(const struct Table* leftTable, const struct Table* rightTable)
-{
-	return strcmp(leftTable->name, rightTable->name);
-}
-
-struct Table* tableCreate(int s)
-{
-	set_capacity(s);
-	struct Table* p = 0;
-	p = (struct Table*)malloc(sizeof(struct Table), capacity);
-	if (!p)
-	{
-		perror("tableCreate :: bad allocation");
-		exit(1);
-	}
+	struct Pair* p = (struct Pair*)malloc(sizeof(struct Pair));
+	p->name = name;
+	p->value = value;
 	return p;
 }
 
-struct Table* tableFind(struct Table* table, const char* name)
+struct Table
 {
-	return (struct Table*)bsearch(name, table, size(), sizeof(struct Table), cmp_find);
+	struct Pair* elem;
+	int sz;
+	int cap;
+};
+
+struct Table* tableCreate()
+{
+	struct Table* table = (struct Table*)malloc(sizeof(struct Table));
+	table->elem = NULL;
+	table->sz = 0;
+	table->cap = 0;
+	return table;
+}
+
+void tableDestroy(struct Table* table)
+{
+	free(table);
+}
+
+void tableResize(struct Table* table)
+{
+	if (table->cap == 0)
+	{
+		table->elem = (struct Pair*)malloc(sizeof(struct Pair) * 2);
+		table->cap = 2;
+		return;
+	}
+	else
+	{
+		if (table->sz == table->cap)
+		{
+			table->elem = (struct Pair*)realloc(table->elem, sizeof(struct Pair) * table->cap * 2);
+			table->cap *= 2;
+			return;
+		}
+	}
 }
 
 void tableInsert(struct Table* table, const char* name, int value)
 {
-	table[size()].name = name;
-	table[size()].value = value;
-	set_size(size() + 1);
-	qsort(table, size(), sizeof(struct Table), cmp_sort);
+	tableResize(table);
+	table->elem[table->sz] = *pair(name, value);
+	++table->sz;
+}
+
+void tablePrint(struct Table* table)
+{
+	printf("Table:\n");
+	for (int i = 0; i < table->sz; ++i)
+	{
+		printf("\t%d:\t%s\t%d\n", i, table->elem[i].name, table->elem[i].value);
+	}
+	printf("Size = %d. Capacity = %d\n", table->sz, table->cap);
+}
+
+struct Pair* tableFind(struct Table* table, const char* name)
+{
+	for (struct Pair* i = table->elem; i != table->elem + table->sz; ++i)
+	{
+		if (strcmp(name, i->name) == 0)
+		{
+			return i;
+		}
+	}
+	return NULL;
 }
 
 void tableRemove(struct Table* table, const char* name)
 {
-	struct Table* find = tableFind(table, name);
-	if (find)
+	struct Pair* temp = tableFind(table, name);
+	if (!temp)
 	{
-		for (int i = find - table; i < size() - 1; ++i)
-		{
-			table[i] = table[i + 1];
-		}
-		set_size(size() - 1);
+		printf("Can't find name '%s' in table", name);
+		return;
 	}
-	else
+	while (temp != table->elem + table->sz - 1)
 	{
-		perror("tableRemove :: no name in table");
+		temp->name = (temp + 1)->name;
+		temp->value = (temp + 1)->value;
+		++temp;
 	}
-}
-
-void tablePrint()
-{
-	printf("\nTable:\n");
-	int n = size();
-	for (int i = 0; i < n; ++i)
-	{
-		printf("%s\t%d\n", table[i].name, table[i].value);
-	}
-	printf("Table Size = %d, Capacity = %d\n\n", size(), capacity());
+	--table->sz;
 }

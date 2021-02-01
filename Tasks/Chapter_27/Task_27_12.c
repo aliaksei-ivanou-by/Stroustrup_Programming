@@ -3,43 +3,31 @@
 
 int main()
 {
-	char* letters[] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
-	int values[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	int s = 11;
+	char* letters[26] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+							"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+	int* values[26] = { 0 };
+	for (int i = 0; i < 26; ++i)
+	{
+		values[i] = i + 1;
+	}
 
-	table = tableCreate(s);
+	struct Table* table = tableCreate();
 
-	for (int i = 0; i < s; ++i)
+	for (int i = 0; i < 26; ++i)
 	{
 		tableInsert(table, letters[i], values[i]);
 	}
+	tablePrint(table);
 
-	tablePrint();
+	tableInsert(table, "AA", 27);
+	tableInsert(table, "BB", 28);
+	tablePrint(table);
 
-	int element = 5;
-	struct Table* t = tableFind(table, letters[element]);
-	if (t != 0)
-	{
-		printf("Element '%s' in table is: '%s' - %d\n\n", letters[element], t->name, t->value);
-	}
-	else
-	{
-		printf("No element '%s' in table\n\n", letters[element]);
-	}
+	tableRemove(table, "AA");
+	tablePrint(table);
 
-	tableRemove(table, letters[5]);
+	tableRemove(table, "BB");
+	tablePrint(table);
 
-	tablePrint();
-
-	t = tableFind(table, letters[element]);
-	if (t != 0)
-	{
-		printf("Element '%s' in table is: '%s' - %d\n\n", letters[element], t->name, t->value);
-	}
-	else
-	{
-		printf("No element '%s' in table\n\n", letters[element]);
-	}
-
-	tableInsert(table, 11, "M");
+	tableDestroy(table);
 }
