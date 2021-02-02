@@ -5,8 +5,8 @@
 
 struct Link
 {
-	struct Link* pre;
-	struct Link* suc;
+	struct Link* prev;
+	struct Link* next;
 };
 
 struct List
@@ -35,7 +35,7 @@ void clear(struct List* lst)
 		struct Link* curr = lst->first;
 		while (curr)
 		{
-			struct Link* next = curr->suc;
+			struct Link* next = curr->next;
 			free(curr);
 			curr = next;
 		}
@@ -53,88 +53,93 @@ void destroy(struct List* lst)
 void push_back(struct List* lst, struct Link* p)
 {
 	assert(lst);
+	assert(p);
 	{
 		struct Link* last = lst->last;
 		if (last)
 		{
-			last->suc = p;
-			p->pre = last;
+			last->next = p;
+			p->prev = last;
 		}
 		else
 		{
 			lst->first = p;
-			p->pre = 0;
+			p->prev = 0;
 		}
 		lst->last = p;
-		p->suc = 0;
+		p->next = 0;
 	}
 }
 
 void push_front(struct List* lst, struct Link* p)
 {
 	assert(lst);
+	assert(p);
 	{
 		struct Link* first = lst->first;
 		if (first)
 		{
-			first->pre = p;
-			p->suc = first;
+			first->prev = p;
+			p->next = first;
 		}
 		else
 		{
 			lst->last = p;
-			p->suc = 0;
+			p->next = 0;
 		}
 		lst->first = p;
-		p->pre = 0;
+		p->prev = 0;
 	}
 }
 
 void insert(struct List* lst, struct Link* p, struct Link* q)
 {
 	assert(lst);
+	assert(p);
+	assert(q);
 	{
-		q->suc = p;
+		q->next = p;
 		if (p == lst->first)
 		{
-			q->pre = 0;
+			q->prev = 0;
 			lst->first = q;
 		}
 		else if (p == lst->last)
 		{
-			if (p->pre)
+			if (p->prev)
 			{
-				q->pre = p->pre;
-				p->pre->suc = q;
+				q->prev = p->prev;
+				p->prev->next = q;
 			}
 			else
 			{
-				q->suc = 0;
+				q->next = 0;
 			}
 		}
 		else
 		{
-			q->pre = p->pre;
-			p->pre->suc = q;
+			q->prev = p->prev;
+			p->prev->next = q;
 		}
-		p->pre = q;
+		p->prev = q;
 	}
 }
 
 struct Link* erase(struct List* lst, struct Link* p)
 {
 	assert(lst);
+	assert(p);
 	if (p == 0)
 	{
 		return 0;
 	}
 	if (p == lst->first)
 	{
-		if (p->suc)
+		if (p->next)
 		{
-			lst->first = p->suc;
-			p->suc->pre = 0;
-			return p->suc;
+			lst->first = p->next;
+			p->next->prev = 0;
+			return p->next;
 		}
 		else
 		{
@@ -146,10 +151,10 @@ struct Link* erase(struct List* lst, struct Link* p)
 	{
 		if (p == lst->last)
 		{
-			if (p->pre)
+			if (p->prev)
 			{
-				lst->last = p->pre;
-				p->pre->suc = 0;
+				lst->last = p->prev;
+				p->prev->next = 0;
 			}
 			else
 			{
@@ -159,9 +164,9 @@ struct Link* erase(struct List* lst, struct Link* p)
 		}
 		else
 		{
-			p->suc->pre = p->pre;
-			p->pre->suc = p->suc;
-			return p->suc;
+			p->next->prev = p->prev;
+			p->prev->next = p->next;
+			return p->next;
 		}
 	}
 }
@@ -173,14 +178,14 @@ struct Link* advance(struct Link* p, int n)
 	{
 		while (n--)
 		{
-			curr = curr->suc;
+			curr = curr->next;
 		}
 	}
 	else
 	{
 		while (n++)
 		{
-			curr = curr->pre;
+			curr = curr->prev;
 		}
 	}
 	return curr;
@@ -209,7 +214,22 @@ void print_names(struct List* lst)
 		{
 			n = ((struct Name*)curr)->n;
 			printf("Name: %s\n", n);
-			curr = curr->suc;
+			curr = curr->next;
 		}
 	}
+}
+
+void push_back_name(struct List* list, char* name)
+{
+	return push_back(list, (struct Link*)make_name(name));
+}
+
+void push_front_name(struct List* list, char* name)
+{
+	return push_front(list, (struct List*)make_name(name));
+}
+
+void insert_name(struct List* list, struct Link* p, char* name)
+{
+	return insert(list, p, (struct List*)make_name(name));
 }
