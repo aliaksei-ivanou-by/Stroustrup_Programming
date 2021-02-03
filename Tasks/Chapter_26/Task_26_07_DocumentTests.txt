@@ -1,0 +1,8 @@
+{ 1.0 find_text gentlemen - 1 }
+{ 1.1 find_text gentlemens - 1 }
+{ 2.0 find_replace_text gentlemen cavaliers 1 }
+{ 2.1 find_replace_text gentlemens cavaliers 1 }
+{ 3.0 count_chars - - 4401 }
+{ 3.1 count_chars - - 4500 }
+{ 4.0 count_words - - 1017 }
+{ 4.1 count_words - - 2000 }

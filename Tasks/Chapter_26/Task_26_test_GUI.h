@@ -56,6 +56,7 @@ Graph_lib::Shape* getCircle(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Circle");
 	}
+	std::cout << "Circle(Point(" << point.x << ", " << point.y << "), " << radius << ")\n";
 	return new Graph_lib::Circle(point, radius);
 }
 
@@ -76,6 +77,7 @@ Graph_lib::Shape* getRectangle(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Rectangle");
 	}
+	std::cout << "Rectangle(Point(" << point.x << ", " << point.y << "), " << width << ", " << height << ")\n";
 	return new Graph_lib::Rectangle(point, width, height);
 }
 
@@ -93,6 +95,8 @@ Graph_lib::Shape* getLine(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Line");
 	}
+	std::cout << "Line(Point(" << point_first.x << ", " << point_first.y <<
+		"), Point(" << point_second.x << ", " << point_second.y << "))\n";
 	return new Graph_lib::Line(point_first, point_second);
 }
 
