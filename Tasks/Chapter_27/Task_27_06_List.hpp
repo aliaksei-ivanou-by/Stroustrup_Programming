@@ -44,18 +44,9 @@ struct List* create()
 	return lst;
 }
 
-void clear(struct List* lst)
-{
-	while (lst->first != -1)
-	{
-		//erase(lst, &lst->links[lst->first]);
-	}
-}
-
 void destroy(struct List* lst)
 {
 	assert(lst);
-	//clear(lst);
 	free(lst);
 }
 
@@ -65,9 +56,14 @@ void list_move_left(struct List* lst, int i)
 	{
 		lst->links[i - 1] = lst->links[i];
 		--(lst->links[i - 1].prev);
-		lst->links[i - 1].next = lst->links[i].next;
+		--(lst->links[i - 1].next);
+		//lst->links[i - 1].next = lst->links[i].next;
 		++i;
 	}
+	lst->links[i - 2].next = -1;
+	lst->links[i - 1].next = INT_MIN;
+	lst->links[i - 1].prev = INT_MIN;
+	lst->links[i - 1].p = "";
 	--(lst->last);
 }
 

@@ -31,11 +31,5 @@ int main()
 	insert_name(names, &names->links[names->first], "Jack"); // insert "Jack"
 	print_names(names);
 
-	while (names->first != -1)
-		erase(names, &names->links[names->last]);
-	
-	printf("After erase\n");
-	print_names(names);
-
 	destroy(names);
 }
