@@ -42,7 +42,7 @@ std::istream& operator>>(std::istream& inputStream, Point& point)
 	return inputStream;
 }
 
-Graph_lib::Shape* getCircle(std::istream& inputStream)
+Graph_lib::Shape* getCircle(std::istream& inputStream, std::ostream& outputStream)
 {
 	char delimeter1;
 	char delimeter2;
@@ -56,11 +56,11 @@ Graph_lib::Shape* getCircle(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Circle");
 	}
-	std::cout << "Circle(Point(" << point.x << ", " << point.y << "), " << radius << ")\n";
+	outputStream << "Circle(Point(" << point.x << ", " << point.y << "), " << radius << ")\n";
 	return new Graph_lib::Circle(point, radius);
 }
 
-Graph_lib::Shape* getRectangle(std::istream& inputStream)
+Graph_lib::Shape* getRectangle(std::istream& inputStream, std::ostream& outputStream)
 {
 	char delimeter1;
 	char delimeter2;
@@ -77,11 +77,11 @@ Graph_lib::Shape* getRectangle(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Rectangle");
 	}
-	std::cout << "Rectangle(Point(" << point.x << ", " << point.y << "), " << width << ", " << height << ")\n";
+	outputStream << "Rectangle(Point(" << point.x << ", " << point.y << "), " << width << ", " << height << ")\n";
 	return new Graph_lib::Rectangle(point, width, height);
 }
 
-Graph_lib::Shape* getLine(std::istream& inputStream)
+Graph_lib::Shape* getLine(std::istream& inputStream, std::ostream& outputStream)
 {
 	char delimeter1;
 	char delimeter2;
@@ -95,12 +95,12 @@ Graph_lib::Shape* getLine(std::istream& inputStream)
 	{
 		throw std::runtime_error("Bad input Shape::Line");
 	}
-	std::cout << "Line(Point(" << point_first.x << ", " << point_first.y <<
+	outputStream << "Line(Point(" << point_first.x << ", " << point_first.y <<
 		"), Point(" << point_second.x << ", " << point_second.y << "))\n";
 	return new Graph_lib::Line(point_first, point_second);
 }
 
-Shape* getShape(std::istream& inputStream)
+Shape* getShape(std::istream& inputStream, std::ofstream& outputStream)
 {
 	std::string shape_type;
 	char ch;
@@ -115,19 +115,19 @@ Shape* getShape(std::istream& inputStream)
 	}
 	if (shape_type == "Circle")
 	{
-		return getCircle(inputStream);
+		return getCircle(inputStream, outputStream);
 	}
 	else
 	{
 		if (shape_type == "Rectangle")
 		{
-			return getRectangle(inputStream);
+			return getRectangle(inputStream, outputStream);
 		}
 		else
 		{
 			if (shape_type == "Line")
 			{
-				return getLine(inputStream);
+				return getLine(inputStream, outputStream);
 			}
 			else
 			{
