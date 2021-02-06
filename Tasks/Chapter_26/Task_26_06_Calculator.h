@@ -46,6 +46,28 @@ private:
 	std::istream& inputTokenStream;
 };
 
+class Variable
+{
+public:
+	std::string name;
+	int value;
+	bool is_const;
+	Variable(std::string n, int v, bool b);
+};
+
+class Symbol_table
+{
+public:
+	int get(std::string s);
+	void set(std::string s, int d);
+	bool is_declared(std::string var);
+	int declare(std::string var, int val, bool b);
+private:
+	std::vector<Variable> var_table;
+};
+
+Symbol_table st;
+
 int expression(Token_stream& tokenStream);
 int my_pow(int base, int expo);
 int primary(Token_stream& tokenStream);
@@ -91,6 +113,7 @@ Token_stream::Token_stream(std::istream& inputStream):
 {}
 
 Token Token_stream::get()
+try
 {
 	if (full)
 	{
@@ -166,19 +189,30 @@ Token Token_stream::get()
 			return Token(name, s);
 		}
 	}
-	throw std::runtime_error("Bad token\n");
+	throw ("Bad token\n");
 	}
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 void Token_stream::putback(Token t)
+try
 {
 	if (full)
 	{
-		throw std::runtime_error("Putback() into full buffer\n");
+		throw ("Putback() into full buffer\n");
 	}
 	buffer = t;
 	full = true;
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 void Token_stream::ignore(char c)
 {
@@ -209,6 +243,7 @@ Variable::Variable(std::string n, int v, bool b):
 // class Symbol_table
 
 int Symbol_table::get(std::string s)
+try
 {
 	for (int i = 0; i < var_table.size(); ++i)
 	{
@@ -217,10 +252,16 @@ int Symbol_table::get(std::string s)
 			return var_table[i].value;
 		}
 	}
-	throw std::runtime_error("Get: undefined variable\n");
+	throw ("Get: undefined variable\n");
+}
+catch (const char* msg)
+{
+	std::cout << msg;
 }
 
+
 void Symbol_table::set(std::string s, int d)
+try
 {
 	for (int i = 0; i < var_table.size(); ++i)
 	{
@@ -228,14 +269,19 @@ void Symbol_table::set(std::string s, int d)
 		{
 			if (var_table[i].is_const)
 			{
-				throw std::runtime_error("Variable is a constant\n");
+				throw ("Variable is a constant\n");
 			}
 			var_table[i].value = d;
 			return;
 		}
 	}
-	throw std::runtime_error("Set: undefined variable\n");
+	throw ("Set: undefined variable\n");
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 bool Symbol_table::is_declared(std::string var)
 {
@@ -250,14 +296,20 @@ bool Symbol_table::is_declared(std::string var)
 }
 
 int Symbol_table::declare(std::string var, int val, bool b)
+try
 {
 	if (is_declared(var))
 	{
-		throw std::runtime_error("Variable declared twice\n");
+		throw ("Variable declared twice\n");
 	}
 	var_table.push_back(Variable(var, val, b));
 	return val;
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 int my_pow(int base, int expo)
 {
@@ -278,6 +330,7 @@ int my_pow(int base, int expo)
 }
 
 int primary(Token_stream& ts)
+try
 {
 	Token t = ts.get();
 	switch (t.kind)
@@ -288,7 +341,7 @@ int primary(Token_stream& ts)
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw std::runtime_error("')' expected\n");
+			throw ("')' expected\n");
 		}
 		return d;
 	}
@@ -328,22 +381,22 @@ int primary(Token_stream& ts)
 		t = ts.get();
 		if (t.kind != '(')
 		{
-			throw std::runtime_error("'(' expected\n");
+			throw ("'(' expected\n");
 		}
 		int d = expression(ts);
 		if (d < 0)
 		{
-			throw std::runtime_error("Square roots of negative numbers... nope!\n");
+			throw ("Square roots of negative numbers... nope!\n");
 		}
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw std::runtime_error("')' expected\n");
+			throw ("')' expected\n");
 		}
 		double root = sqrt(d);
 		if (int(root) != root)
 		{
-			throw std::runtime_error("SQRT operation resulted in non-integer value\n");
+			throw ("SQRT operation resulted in non-integer value\n");
 		}
 		return int(root);
 	}
@@ -352,39 +405,45 @@ int primary(Token_stream& ts)
 		t = ts.get();
 		if (t.kind != '(')
 		{
-			throw std::runtime_error("'(' expected\n");
+			throw ("'(' expected\n");
 		}
 		int d = expression(ts);
 		t = ts.get();
 		if (t.kind != ',')
 		{
-			throw std::runtime_error("',' expected\n");
+			throw ("',' expected\n");
 		}
 		t = ts.get();
 		if (t.kind != number)
 		{
-			throw std::runtime_error("Second argument of 'pow' is not a number\n");
+			throw ("Second argument of 'pow' is not a number\n");
 		}
 		int i = int(t.value);
 		if (i != t.value)
 		{
-			throw std::runtime_error("Second argument of 'pow' is not an integer\n");
+			throw ("Second argument of 'pow' is not an integer\n");
 		}
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw std::runtime_error("')' expected");
+			throw ("')' expected");
 		}
 		return my_pow(d, i);
 	}
 	default:
 	{
-		throw std::runtime_error("Primary expected");
+		throw ("Primary expected");
 	}
 	}
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 int term(Token_stream& ts)
+try
 {
 	int left = primary(ts);
 	Token t = ts.get();
@@ -403,13 +462,13 @@ int term(Token_stream& ts)
 			int d = primary(ts);
 			if (d == 0)
 			{
-				throw std::runtime_error("Divide by zero\n");
+				throw ("Divide by zero\n");
 			}
 			left /= d;
 			int left_int = int(left);
 			if (left_int != left)
 			{
-				throw std::runtime_error("Division led to non-integer value\n");
+				throw ("Division led to non-integer value\n");
 			}
 			t = ts.get();
 			break;
@@ -420,16 +479,16 @@ int term(Token_stream& ts)
 			int i1 = int(left);
 			if (i1 != left)
 			{
-				throw std::runtime_error("Left-hand operand of % not int\n");
+				throw ("Left-hand operand of % not int\n");
 			}
 			int i2 = int(d);
 			if (i2 != d)
 			{
-				throw std::runtime_error("Right-hand operand of % not int\n");
+				throw ("Right-hand operand of % not int\n");
 			}
 			if (i2 == 0)
 			{
-				throw std::runtime_error("%: divide by zero\n");
+				throw ("%: divide by zero\n");
 			}
 			left = i1 % i2;
 			t = ts.get();
@@ -443,8 +502,14 @@ int term(Token_stream& ts)
 		}
 	}
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 int expression(Token_stream& ts)
+try
 {
 	int left = term(ts);
 	Token t = ts.get();
@@ -484,7 +549,7 @@ int expression(Token_stream& ts)
 		}
 		case '=':
 		{
-			throw std::runtime_error("Use of '=' outside of a declaration\n");
+			throw ("Use of '=' outside of a declaration\n");
 		}
 		default:	
 		{
@@ -494,24 +559,35 @@ int expression(Token_stream& ts)
 		}
 	}
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 int declaration(Token_stream& tokenStream, bool b)
+try
 {
 	Token t = tokenStream.get();
 	if (t.kind != name)
 	{
-		throw std::runtime_error("Name expected in declaration\n");
+		throw ("Name expected in declaration\n");
 	}
 	std::string var_name = t.name;
 	Token t2 = tokenStream.get();
 	if (t2.kind != '=')
 	{
-		throw std::runtime_error("= missing in declaration\n");
+		throw ("= missing in declaration\n");
 	}
 	int d = expression(tokenStream);
 	st.declare(var_name, d, b);
 	return d;
 }
+catch (const char* msg)
+{
+	std::cout << msg;
+}
+
 
 int statement(Token_stream& tokenStream)
 {
