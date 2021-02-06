@@ -180,7 +180,7 @@ try
 			return Token(name, s);
 		}
 	}
-		throw "Bad token\n";
+		throw ("Bad token\n");
 	}
 }
 catch (const char* msg)
@@ -193,7 +193,7 @@ try
 {
 	if (full)
 	{
-		throw "Putback() into full buffer\n";
+		throw ("Putback() into full buffer\n");
 	}
 	buffer = t;
 	full = true;
@@ -245,7 +245,7 @@ try
 			return var_table[i].value;
 		}
 	}
-	throw "Get: undefined variable\n";
+	throw ("Get: undefined variable\n");
 }
 catch (const char* msg)
 {
@@ -265,13 +265,13 @@ try
 		{
 			if (var_table[i].is_const)
 			{
-				throw "Variable is a constant\n";
+				throw ("Variable is a constant\n");
 			}
 			var_table[i].value = d;
 			return;
 		}
 	}
-	throw "Set: undefined variable\n";
+	throw ("Set: undefined variable\n");
 }
 catch (const char* msg)
 {
@@ -299,7 +299,7 @@ try
 {
 	if (is_declared(var))
 	{
-		throw "Variable declared twice\n";
+		throw ("Variable declared twice\n");
 	}
 	var_table.push_back(Variable(var, val, b));
 	return val;
@@ -343,7 +343,7 @@ try
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw "')' expected\n";
+			throw ("')' expected\n");
 		}
 		return d;
 	}
@@ -383,22 +383,22 @@ try
 		t = ts.get();
 		if (t.kind != '(')
 		{
-			throw "'(' expected\n";
+			throw ("'(' expected\n");
 		}
 		int d = expression();
 		if (d < 0)
 		{
-			throw "Square roots of negative numbers... nope!\n";
+			throw ("Square roots of negative numbers... nope!\n");
 		}
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw "')' expected\n";
+			throw ("')' expected\n");
 		}
 		double root = sqrt(d);
 		if (int(root) != root)
 		{
-			throw "SQRT operation resulted in non-integer value\n";
+			throw ("SQRT operation resulted in non-integer value\n");
 		}
 		return int(root);
 	}
@@ -407,34 +407,34 @@ try
 		t = ts.get();
 		if (t.kind != '(')
 		{
-			throw "'(' expected\n";
+			throw ("'(' expected\n");
 		}
 		int d = expression();
 		t = ts.get();
 		if (t.kind != ',')
 		{
-			throw "',' expected\n";
+			throw ("',' expected\n");
 		}
 		t = ts.get();
 		if (t.kind != number)
 		{
-			throw "Second argument of 'pow' is not a number\n";
+			throw ("Second argument of 'pow' is not a number\n");
 		}
 		int i = int(t.value);
 		if (i != t.value)
 		{
-			throw "Second argument of 'pow' is not an integer\n";
+			throw ("Second argument of 'pow' is not an integer\n");
 		}
 		t = ts.get();
 		if (t.kind != ')')
 		{
-			throw "')' expected";
+			throw ("')' expected");
 		}
 		return my_pow(d, i);
 	}
 	default:
 	{
-		throw "Primary expected";
+		throw ("Primary expected");
 	}
 	}
 }
@@ -467,13 +467,13 @@ try
 			int d = primary();
 			if (d == 0)
 			{
-				throw "Divide by zero\n";
+				throw ("Divide by zero\n");
 			}
 			left /= d;
 			int left_int = int(left);
 			if (left_int != left)
 			{
-				throw "Division led to non-integer value\n";
+				throw ("Division led to non-integer value\n");
 			}
 			t = ts.get();
 			break;
@@ -484,16 +484,16 @@ try
 			int i1 = int(left);
 			if (i1 != left)
 			{
-				throw "Left-hand operand of % not int\n";
+				throw ("Left-hand operand of % not int\n");
 			}
 			int i2 = int(d);
 			if (i2 != d)
 			{
-				throw "Right-hand operand of % not int\n";
+				throw ("Right-hand operand of % not int\n");
 			}
 			if (i2 == 0)
 			{
-				throw "%: divide by zero\n";
+				throw ("%: divide by zero\n");
 			}
 			left = i1 % i2;
 			t = ts.get();
@@ -557,7 +557,7 @@ try
 		}
 		case '=':
 		{
-			throw "Use of '=' outside of a declaration\n";
+			throw ("Use of '=' outside of a declaration\n");
 		}
 		default:	
 		{
@@ -582,13 +582,13 @@ try
 	Token t = ts.get();
 	if (t.kind != name)
 	{
-		throw "Name expected in declaration\n";
+		throw ("Name expected in declaration\n");
 	}
 	std::string var_name = t.name;
 	Token t2 = ts.get();
 	if (t2.kind != '=')
 	{
-		throw "= missing in declaration\n";
+		throw ("= missing in declaration\n");
 	}
 	int d = expression();
 	st.declare(var_name, d, b);
