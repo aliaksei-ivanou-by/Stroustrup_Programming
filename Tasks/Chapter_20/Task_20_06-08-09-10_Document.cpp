@@ -45,6 +45,19 @@ try
 		print(myDoc.begin(), myDoc.end());
 	}
 
+	std::cout << "Text with replace (all)\n";
+	std::string myString3_1 = "alpha.numeric";
+	std::string myString3_2 = "alpha numeric";
+	int count = myDoc.find_replace_text_all(myString3_1, myString3_2);
+	if (count == 0)
+	{
+		std::cout << "myString3_1 not found\n";
+	}
+	else
+	{
+		print(myDoc.begin(), myDoc.end());
+	}
+
 	std::cout << "\n\n";
 
 	std::cout << "Number of chars in text is " << myDoc.count_chars() << "\n\n";

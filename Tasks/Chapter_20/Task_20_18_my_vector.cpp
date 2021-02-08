@@ -16,7 +16,7 @@ public:
 	{}
 	explicit my_vector(size_t n) :
 		sz{ n },
-		elem{ std::make_unique<T[]>(n).release() },
+		elem{ new T[n] },
 		space{ n }
 	{
 		for (auto i = begin(); i != end(); ++i)
@@ -26,10 +26,14 @@ public:
 	}
 	my_vector(const my_vector& v) :
 		sz{ v.sz },
-		elem{ std::make_unique<T[]>(v.sz).release() },
+		elem{ new T[v.sz] },
 		space{ v.sz }
 	{
 		std::copy(v.elem, v.elem + v.sz, elem);
+	}
+	~my_vector()
+	{
+		delete[] elem;
 	}
 	T& operator[](int n)
 	{

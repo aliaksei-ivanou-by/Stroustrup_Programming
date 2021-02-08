@@ -219,6 +219,32 @@ struct Document
 		}
 		return pFirst;
 	}
+	int find_replace_text_all(const std::string& sFind, const std::string& sReplace)
+	{
+		int count = 0;
+		if (sFind == "")
+		{
+			return count;
+		}
+		Text_iterator pFirst = find_text(sFind);
+		if (pFirst == end())
+		{
+			return count;
+		}
+		while (pFirst != end())
+		{
+			Line& line = pFirst.get_line();
+			auto pLast = pFirst.get_pos();
+			pLast = line.erase(pLast, pLast + sFind.size());
+			for (auto i = sReplace.rbegin(); i != sReplace.rend(); ++i)
+			{
+				pLast = line.insert(pLast, *i);
+			}
+			++count;
+			pFirst = find_text(sFind);
+		}
+		return count;
+	}
 	friend std::istream& operator>>(std::istream& inputStream, Document& d)
 	{
 		for (char ch; inputStream.get(ch); )
@@ -253,12 +279,9 @@ void advance(Iterator& p, int n)
 		++p;
 		--n;
 	}
-	if (n < 0)
+	while (n < 0)
 	{
-		while (n < 0)
-		{
-			--p;
-			++n;
-		}
+		--p;
+		++n;
 	}
 }

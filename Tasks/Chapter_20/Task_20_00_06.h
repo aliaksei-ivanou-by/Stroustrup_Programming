@@ -27,7 +27,7 @@ void advance(Iter& p, int n)
 		++p;
 		--n;
 	}
-	if (n < 0)
+	while (n < 0)
 	{
 		--p;
 		++n;

@@ -29,7 +29,7 @@ std::istream& operator>>(std::istream& inputStream, std::vector<T>& vector)
 }
 
 template<typename T>
-std::ostream& operator<<(std::ostream& outputStream, std::vector<T>& vector)
+std::ostream& operator<<(std::ostream& outputStream, const std::vector<T>& vector)
 {
 	outputStream << "{ ";
 	for (auto& i : vector)

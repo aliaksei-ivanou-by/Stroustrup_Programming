@@ -40,7 +40,7 @@ double* get_from_jack(int* count)
 	return data;
 }
 
-std::vector<double>* get_from_jill()
+std::vector<double> get_from_jill()
 {
 	std::string fileName = "Task_20_00_04_jill.txt";
 	std::ifstream fileStream(fileName.c_str());
@@ -48,11 +48,11 @@ std::vector<double>* get_from_jill()
 	{
 		throw std::runtime_error("Can't open file");
 	}
-	std::vector<double>* newVector = new std::vector<double>;
+	std::vector<double> newVector = {};
 	double number;
 	while (fileStream >> number)
 	{
-		(*newVector).push_back(number);
+		newVector.push_back(number);
 	}
 	return newVector;
 }
@@ -61,16 +61,15 @@ void fct()
 {
 	int jack_count = 0;
 	double* jack_data = get_from_jack(&jack_count);
-	std::vector<double>* jill_data = get_from_jill();
+	std::vector<double> jill_data = get_from_jill();
 
 	double* jack_high = high(jack_data, jack_data + jack_count);
-	std::vector<double>& v = *jill_data;
+	std::vector<double>& v = jill_data;
 	double* jill_high = high(&v[0], &v[0] + v.size());
 
 	std::cout << "Max Jill: " << *jill_high << "; Max Jack: " << *jack_high;
 
 	delete[] jack_data;
-	delete jill_data;
 }
 
 int main()

@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 
 template<class A>
@@ -58,10 +57,27 @@ public:
 	}
 	vector& operator=(const vector& v)
 	{
+		if (this == &v)
+		{
+			return *this;
+		}
+		if (v.sz <= space)
+		{
+			for (size_t i = 0; i < v.sz; ++i)
+			{
+				alloc.construct(&elem[i], v.elem[i]);
+			}
+			sz = v.sz;
+			return *this;
+		}
 		T* ptrTemp = alloc.allocate(v.sz);
 		for (size_t i = 0; i < v.sz; ++i)
 		{
 			alloc.construct(&ptrTemp[i], v.elem[i]);
+		}
+		for (size_t i = 0; i < sz; ++i)
+		{
+			alloc.destroy(&elem[i]);
 		}
 		alloc.deallocate(elem);
 		sz = v.sz;
@@ -79,14 +95,9 @@ public:
 	}
 	vector& operator=(vector&& vv)
 	{
-		alloc.deallocate(elem);
-		elem = vv.elem;
-		sz = vv.sz;
-		space = vv.space;
-
-		vv.sz = 0;
-		vv.elem = nullptr;
-		vv.space = 0;
+		std::swap(elem, vv.elem);
+		std::swap(sz, vv.sz);
+		std::swap(space, vv.space);
 		return *this;
 	}
 	~vector()
@@ -195,3 +206,28 @@ public:
 		++sz;
 	}
 };
+
+int main()
+try
+{
+	vector<int> v;
+	for (int i = 0; i < 10; ++i)
+	{
+		v.push_back(i);
+	}
+	for (int i = 10; i < 20; ++i)
+	{
+		v.push_front(i);
+	}
+	vector<int> vv = v;
+	vector<int> vv1(std::move(vv));
+}
+catch (const std::exception& e)
+{
+	std::cout << "Exception occured: " << e.what() << '\n';
+	return 1;
+}
+catch (...)
+{
+	return 2;
+}

@@ -38,7 +38,7 @@ private:
 public:
 	class iterator;
 	my_list() :
-		first{ new Link<Elem>() },
+		first{ nullptr },
 		last{ first },
 		sz{}
 	{}
@@ -106,6 +106,11 @@ public:
 	void push_back(const Elem& v)
 	{
 		Link<Elem>* p = new Link<Elem>(v);
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		if (last == first)
 		{
 			first = p;
@@ -122,6 +127,11 @@ public:
 	void push_front(const Elem& v)
 	{
 		Link<Elem>* p = new Link<Elem>(v);
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		p->succ = first;
 		first->prev = p;
 		first = p;

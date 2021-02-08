@@ -34,18 +34,15 @@ class my_list
 private:
 	Link<Elem>* first;
 	Link<Elem>* last;
-	int sz;
 public:
 	class iterator;
 	my_list() :
-		first{ new Link<Elem>() },
-		last{ first },
-		sz{}
+		first{ nullptr },
+		last{ first }
 	{}
 	my_list(int n, Elem elem = Elem()) :
 		first{ new Link<Elem>() },
-		last{ first },
-		sz{ n }
+		last{ first }
 	{
 		for (int i = 0; i < n; ++i)
 		{
@@ -62,6 +59,11 @@ public:
 	}
 	int size()
 	{
+		int sz = 0;
+		for (iterator i = begin(); i != end(); ++i)
+		{
+			++sz;
+		}
 		return sz;
 	}
 	iterator begin()
@@ -83,6 +85,11 @@ public:
 	iterator insert(iterator p, const Elem& v)
 	{
 		Link<Elem>* k = new Link<Elem>(v, p->prev);
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		if (p->succ)
 		{
 			k->succ = p->succ->prev;
@@ -100,12 +107,16 @@ public:
 		{
 			first = k;
 		}
-		++sz;
 		return iterator(k);
 	}
 	void push_back(const Elem& v)
 	{
 		Link<Elem>* p = new Link<Elem>(v);
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		if (last == first)
 		{
 			first = p;
@@ -117,18 +128,26 @@ public:
 		p->prev = last->prev;
 		p->succ = last;
 		last->prev = p;
-		++sz;
 	}
 	void push_front(const Elem& v)
 	{
 		Link<Elem>* p = new Link<Elem>(v);
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		p->succ = first;
 		first->prev = p;
 		first = p;
-		++sz;
 	}
 	void pop_front()
 	{
+		if (first == nullptr)
+		{
+			first = new Link<Elem>();
+			last = first;
+		}
 		Link<Elem>* p = first->succ;
 		delete first;
 		first = p;
@@ -220,6 +239,7 @@ try
 		listHigh.push_back(number);
 	}
 	auto p = high(listHigh.begin(), listHigh.end());
+
 	std::cout << "High value of listHigh is " << *p << '\n';
 }
 catch (const std::exception& e)
