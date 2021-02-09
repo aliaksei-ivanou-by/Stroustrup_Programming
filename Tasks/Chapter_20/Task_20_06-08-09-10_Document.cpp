@@ -22,10 +22,10 @@ try
 
 	std::cout << "Original text from some word\n";
 	std::string myString1 = "another";
-	Text_iterator findSome = myDoc.find_text(myString1);
+	Text_iterator findSome = myDoc.find_text(myDoc.begin(), myDoc.end(), myString1);
 	if (findSome == myDoc.end())
 	{
-		std::cout << "myString1 not found\n";
+		std::cout << "string not found\n";
 	}
 	else
 	{
@@ -35,23 +35,25 @@ try
 
 	std::cout << "Text with replace\n";
 	std::string myString2 = "same";
-	Text_iterator isReplaced = myDoc.find_replace_text(myString1, myString2);
-	if (isReplaced == myDoc.end())
+	unsigned long long int count = myDoc.find_text_replace(myDoc.begin(), myDoc.end(), myString1, myString2);
+	if (count == 0)
 	{
-		std::cout << "myString1 not found\n";
+		std::cout << "string not found\n";
 	}
 	else
 	{
 		print(myDoc.begin(), myDoc.end());
 	}
 
-	std::cout << "Text with replace (all)\n";
-	std::string myString3_1 = "alpha.numeric";
-	std::string myString3_2 = "alpha numeric";
-	int count = myDoc.find_replace_text_all(myString3_1, myString3_2);
+	std::cout << "\n\n";
+
+	std::cout << "Text with replace\n";
+	std::string myString31 = "as12b.\nThe";
+	std::string myString32 = "as12b.\nThis";
+	count = myDoc.find_text_replace(myDoc.begin(), myDoc.end(), myString31, myString32);
 	if (count == 0)
 	{
-		std::cout << "myString3_1 not found\n";
+		std::cout << "string not found\n";
 	}
 	else
 	{

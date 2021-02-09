@@ -11,7 +11,7 @@ private:
 	std::list<Line>::iterator ln;
 	Line::iterator pos;
 public:
-	Text_iterator(std::list<Line>::iterator ll, Line::iterator pp) :
+	Text_iterator(std::list<Line>::iterator ll, Line::iterator pp):
 		ln{ ll },
 		pos{ pp }
 	{}
@@ -37,9 +37,9 @@ public:
 	{
 		return !(*this == other);
 	}
-	Line& get_line() const
+	std::list<Line>::iterator get_line() const
 	{
-		return *ln;
+		return ln;
 	}
 	Line::iterator get_pos() const
 	{
@@ -58,20 +58,44 @@ bool match(Text_iterator first, Text_iterator last, const std::string& s)
 	return p == s.end();
 }
 
+void print(const Text_iterator start, const Text_iterator end)
+{
+	for (auto i = start; i != end; ++i)
+	{
+		std::cout << *i;
+	}
+}
+
+template<typename Iterator>
+void advance(Iterator& p, int n)
+{
+	while (n > 0)
+	{
+		++p;
+		--n;
+	}
+	while (n < 0)
+	{
+		--p;
+		++n;
+	}
+}
+
 struct Document
 {
+public:
 	std::list<Line> line;
 	Document()
 	{
 		line.push_back(Line());
 	}
-	const Text_iterator begin()
+	Text_iterator begin()
 	{
 		return Text_iterator(line.begin(), (*line.begin()).begin());
 	}
-	const Text_iterator end()
+	Text_iterator end()
 	{
-		auto last = line.end();
+		std::list<Line>::iterator last = line.end();
 		--last;
 		return Text_iterator(last, (*last).end());
 	}
@@ -84,13 +108,114 @@ struct Document
 	}
 	void erase_line(int n)
 	{
-		if (n < 0 || (*this).line.size() - 1 < n)
+		if (n < 0 || (*this).line.size() - 1 <= n)
 		{
 			return;
 		}
-		auto p = (*this).line.begin();
+		std::list<Line>::iterator p = (*this).line.begin();
 		advance(p, n);
 		(*this).line.erase(p);
+	}
+	Text_iterator find_text(Text_iterator first, Text_iterator last, const std::string& s)
+	{
+		if (s.size() == 0)
+		{
+			return last;
+		}
+		char first_char = s[0];
+		while (true)
+		{
+			Text_iterator p = std::find(first, last, first_char);
+			if (p == last || match(p, last, s))
+			{
+				return p;
+			}
+			first = ++p;
+		}
+	}
+	void concat_lines(Text_iterator& pos)
+	{
+		auto current = pos.get_line();
+		auto posLine = pos.get_pos();
+		auto index = posLine - (*current).begin();
+		auto next = current;
+		++next;
+		(*current).insert((*current).end(), (*next).begin(), (*next).end());
+		pos = Text_iterator(current, (*current).begin() + index);
+		auto listIterator = begin().get_line();
+		int line = 0;
+		while (listIterator != next)
+		{
+			++listIterator;
+			++line;
+		}
+		erase_line(line);
+	}
+	unsigned long long int find_text_replace(Text_iterator first, Text_iterator last,
+		const std::string& stringFind, const std::string& stringReplace)
+	{
+		unsigned long long int count = 0;
+		if (stringFind == "")
+		{
+			return count;
+		}
+		Text_iterator pos = find_text(first, last, stringFind);
+		while (pos != last)
+		{
+			auto stringFindIterator = stringFind.begin();
+			auto stringReplaceIterator = stringReplace.begin();
+			while (stringFindIterator != stringFind.end() &&
+				stringReplaceIterator != stringReplace.end())
+			{
+				if (*stringFindIterator != *stringReplaceIterator)
+				{
+					*pos = *stringReplaceIterator;
+					if (*stringFindIterator == '\n') // add next line to current
+					{
+						concat_lines(pos);
+					}
+					if (*stringReplaceIterator == '\n') // add text to the next line
+					{
+						auto current = pos.get_line();
+						auto next = current;
+						++next;
+						(*next).insert((*next).begin(), pos.get_pos() + 1, (*current).end());
+						(*current).erase(pos.get_pos() + 1, (*current).end());
+					}
+				}
+				++pos;
+				++stringFindIterator;
+				++stringReplaceIterator;
+			}
+			while (stringFindIterator != stringFind.end())
+			{
+				if (*pos == '\n') // add next line to current
+				{
+					concat_lines(pos);
+				}
+				pos = Text_iterator(pos.get_line(),
+					(*pos.get_line()).erase(pos.get_pos()));
+				++stringFindIterator;
+			}
+			while (stringReplaceIterator != stringReplace.end())
+			{
+				pos = Text_iterator(pos.get_line(),
+					(*pos.get_line()).insert(pos.get_pos(), *stringReplaceIterator));
+				if (*stringReplaceIterator == '\n') // add text to the next line
+				{
+					auto current = pos.get_line();
+					auto next = current;
+					++next;
+					(*next).insert((*next).begin(), pos.get_pos() + 1, (*current).end());
+					(*current).erase(pos.get_pos() + 1, (*current).end());
+				}
+				++pos;
+				++stringReplaceIterator;
+			}
+			++count;
+			pos = find_text(pos, last, stringFind);
+		}
+		return count;
 	}
 	unsigned long long int count_chars()
 	{
@@ -180,71 +305,6 @@ struct Document
 		}
 		return count;
 	}
-	Text_iterator find_text(const std::string& s)
-	{
-		Text_iterator first = begin();
-		Text_iterator last = end();
-		if (s.size() == 0)
-		{
-			return last;
-		}
-		char first_char = s[0];
-		while (true)
-		{
-			Text_iterator p = std::find(first, last, first_char);
-			if (p == last || match(p, last, s))
-			{
-				return p;
-			}
-			first = ++p;
-		}
-	}
-	Text_iterator find_replace_text(const std::string& sFind, const std::string& sReplace)
-	{
-		if (sFind == "")
-		{
-			return end();
-		}
-		Text_iterator pFirst = find_text(sFind);
-		if (pFirst == end())
-		{
-			return end();
-		}
-		Line& line = pFirst.get_line();
-		auto pLast = pFirst.get_pos();
-		pLast = line.erase(pLast, pLast + sFind.size());
-		for (auto i = sReplace.rbegin(); i != sReplace.rend(); ++i)
-		{
-			pLast = line.insert(pLast, *i);
-		}
-		return pFirst;
-	}
-	int find_replace_text_all(const std::string& sFind, const std::string& sReplace)
-	{
-		int count = 0;
-		if (sFind == "")
-		{
-			return count;
-		}
-		Text_iterator pFirst = find_text(sFind);
-		if (pFirst == end())
-		{
-			return count;
-		}
-		while (pFirst != end())
-		{
-			Line& line = pFirst.get_line();
-			auto pLast = pFirst.get_pos();
-			pLast = line.erase(pLast, pLast + sFind.size());
-			for (auto i = sReplace.rbegin(); i != sReplace.rend(); ++i)
-			{
-				pLast = line.insert(pLast, *i);
-			}
-			++count;
-			pFirst = find_text(sFind);
-		}
-		return count;
-	}
 	friend std::istream& operator>>(std::istream& inputStream, Document& d)
 	{
 		for (char ch; inputStream.get(ch); )
@@ -262,26 +322,3 @@ struct Document
 		return inputStream;
 	}
 };
-
-void print(const Text_iterator start, const Text_iterator end)
-{
-	for (auto i = start; i != end; ++i)
-	{
-		std::cout << *i;
-	}
-}
-
-template<typename Iterator>
-void advance(Iterator& p, int n)
-{
-	while (n > 0)
-	{
-		++p;
-		--n;
-	}
-	while (n < 0)
-	{
-		--p;
-		++n;
-	}
-}
