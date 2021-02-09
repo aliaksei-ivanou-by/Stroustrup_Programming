@@ -77,7 +77,7 @@ private:
 	}
 
 	void case1CountWord()
-		try
+	try
 	{
 		hideAll();
 
@@ -91,7 +91,7 @@ private:
 		outboxInformation.show();
 	}
 	void case1FindCountWord()
-		try
+	try
 	{
 		std::string fileName = inboxFileName.get_string();
 		std::map<std::string, int> words = textClean(fileName);
@@ -110,7 +110,7 @@ private:
 		outboxInformation.show();
 	}
 	void case2FindMostFrequentlyWord()
-		try
+	try
 	{
 		hideAll();
 
@@ -137,7 +137,7 @@ private:
 		outboxInformation.show();
 	}
 	void case3FindLongestWord()
-		try
+	try
 	{
 		hideAll();
 
@@ -165,7 +165,7 @@ private:
 		outboxInformation.show();
 	}
 	void case4FindShortestWord()
-		try
+	try
 	{
 		hideAll();
 

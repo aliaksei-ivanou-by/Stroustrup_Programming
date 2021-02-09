@@ -6,23 +6,26 @@
 int main()
 try
 {
-	std::string from = "Task_21_00_06.txt";
-	std::string to = "Task_21_00_06_out.txt";
+	std::string fileNameInput = "Task_21_00_06.txt";
+	std::string fileNameOutput = "Task_21_00_06_out.txt";
 
-	std::ifstream is(from.c_str());
-	if (!is)
+	std::ifstream inputFileStream(fileNameInput);
+	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open the file");
+		throw std::runtime_error("Can't open the file " + fileNameInput);
 	}
-	std::ofstream os(to.c_str());
+	std::ofstream outputFileStream(fileNameOutput);
 
-	std::istream_iterator<std::string> ii(is);
-	std::istream_iterator<std::string> eos;
-	std::ostream_iterator<std::string> oo(os, "\n");
+	std::istream_iterator<std::string> inputStringStream(inputFileStream);
+	std::istream_iterator<std::string> inputStringStreamLimiter;
+	std::ostream_iterator<std::string> outputStringStream(outputFileStream, "\n");
 
-	std::vector<std::string> b(ii, eos);
+	std::vector<std::string> b(inputStringStream, inputStringStreamLimiter);
 	std::sort(b.begin(), b.end());
-	copy(b.begin(), b.end(), oo);
+	copy(b.begin(), b.end(), outputStringStream);
+
+	inputFileStream.close();
+	outputFileStream.close();
 }
 catch (const std::exception& e)
 {

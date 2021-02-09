@@ -13,9 +13,9 @@ struct Item
 	int iid;
 	double value;
 	Item():
-		name {},
-		iid{},
-		value{}
+		name{ },
+		iid{ },
+		value{ }
 	{}
 	Item(const std::string& n, const int i, const double v):
 		name{ n },
@@ -38,8 +38,8 @@ struct Item
 	}
 };
 
-template<typename In>
-void print(In first, In last)
+template<typename Iterator>
+void print(Iterator first, Iterator last)
 {
 	while (first != last)
 	{
@@ -63,7 +63,7 @@ void get_map(std::map<std::string, int>& myMap)
 	std::cin >> myString >> myInt;
 	if (!std::cin)
 	{
-		throw std::runtime_error("Cin Error");
+		throw std::runtime_error("std::cin error");
 	}
 	myMap[myString] = myInt;
 }
@@ -76,7 +76,7 @@ void part11()
 	std::ifstream inputFileStream(viFileName.c_str());
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + viFileName);
 	}
 	Item i;
 	int key = 0;
@@ -135,7 +135,7 @@ void part12()
 	std::ifstream inputFileStream(liFileName.c_str());
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + liFileName);
 	}
 	Item i;
 	int key = 0;
@@ -251,7 +251,7 @@ void part3()
 	std::ifstream inputFileStream(myFileName.c_str());
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + myFileName);
 	}
 	double d;
 	while (inputFileStream >> d)

@@ -32,12 +32,17 @@ int main()
 try
 {
 	std::set<Fruit*, Fruit_comparison> inventory;
-	inventory.insert(std::make_unique<Fruit>("quince", 5).release());
-	inventory.insert(std::make_unique<Fruit>("apple", 200, 0.37).release());
+	inventory.insert(new Fruit("quince", 5));
+	inventory.insert(new Fruit("apple", 200, 0.37));
 	for (const auto& i : inventory)
 	{
 		std::cout << i << '\n';
 	}
+	for (const auto& i : inventory)
+	{
+		delete i;
+	}
+	inventory.clear();
 }
 catch (const std::exception& e)
 {

@@ -16,10 +16,10 @@ try
 	std::vector<Order> orders1;
 	std::string fileName1 = "Task_21_09-10_File1.txt";
 	std::string fileName1Result = "Task_21_09-10_File1_result.txt";
-	std::ifstream fileInputStream1(fileName1.c_str());
+	std::ifstream fileInputStream1(fileName1);
 	if (!fileInputStream1)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + fileName1);
 	}
 	Order order1;
 	while (fileInputStream1 >> order1)
@@ -51,10 +51,10 @@ try
 	std::list<Order> orders2;
 	std::string fileName2 = "Task_21_09-10_File2.txt";
 	std::string fileName2Result = "Task_21_09-10_File2_result.txt";
-	std::ifstream fileInputStream2(fileName2.c_str());
+	std::ifstream fileInputStream2(fileName2);
 	if (!fileInputStream2)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + fileName2);
 	}
 	Order order2;
 	while (fileInputStream2 >> order2)
@@ -84,7 +84,7 @@ try
 
 	// FILE 3
 	std::string fileName3Result = "Task_21_09-10_File3_result.txt";
-	std::ofstream fileOutputStream3(fileName3Result.c_str());
+	std::ofstream fileOutputStream3(fileName3Result);
 	std::vector<Order> orders2Vector(orders2.begin(), orders2.end());
 	std::sort(orders2Vector.begin(), orders2Vector.end());
 	std::vector<Order> ordersMerge(orders1.size() + orders2.size());
@@ -103,7 +103,7 @@ try
 	// FILE 4
 	std::set<Order> mySet;
 	std::string fileName4Result = "Task_21_09-10_File4_result.txt";
-	std::ofstream fileOutputStream4(fileName4Result.c_str());
+	std::ofstream fileOutputStream4(fileName4Result);
 	for (auto i = ordersMerge.begin(); i != ordersMerge.end(); ++i)
 	{
 		mySet.insert(*i);

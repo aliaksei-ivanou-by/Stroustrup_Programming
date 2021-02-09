@@ -53,10 +53,10 @@ private:
 	{
 		// READ FILE
 		std::string fileName = boxFileName.get_string();
-		std::ifstream fileInputStream(fileName.c_str());
+		std::ifstream fileInputStream(fileName);
 		if (!fileInputStream)
 		{
-			throw std::runtime_error("Can't open file");
+			throw std::runtime_error("Can't open file" + fileName);
 		}
 		std::vector<Order> ordersFile;
 		Order orderFile;
@@ -80,7 +80,7 @@ private:
 		Order orderAdd = Order(clientName, clientAddress, clientBirthdayDate, purchases);
 		ordersFile.push_back(orderAdd);
 		std::sort(ordersFile.begin(), ordersFile.end());
-		std::ofstream fileOutputStream(fileName.c_str(), std::ios_base::trunc);
+		std::ofstream fileOutputStream(fileName, std::ios_base::trunc);
 		for (auto i = ordersFile.begin(); i != ordersFile.end(); ++i)
 		{
 			fileOutputStream << *i;

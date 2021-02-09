@@ -13,7 +13,7 @@ public:
 	{}
 };
 
-double price(double v, const Record& r)
+double price(const double v, const Record& r)
 {
 	return v + r.unit_price * r.units;
 }

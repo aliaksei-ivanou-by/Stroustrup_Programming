@@ -9,7 +9,7 @@ void fileOpen(std::ifstream& inputFileStream, const std::string& fileName)
 	inputFileStream = std::ifstream(fileName);
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + fileName);
 	}
 }
 
@@ -131,7 +131,7 @@ std::map<std::string, int> textClean(const std::string& fileName)
 	fileOpen(inputFileStream, fileName);
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file" + fileName);
 	}
 
 	char ch;

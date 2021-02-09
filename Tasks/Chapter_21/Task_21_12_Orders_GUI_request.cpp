@@ -100,7 +100,7 @@ private:
 		clearAll();
 
 		std::string fileName = inboxFileName.get_string();
-		std::ifstream fileInputStream(fileName.c_str());
+		std::ifstream fileInputStream(fileName);
 		if (!fileInputStream)
 		{
 			outboxMessages.put("Can't open file " + fileName);
@@ -128,7 +128,7 @@ private:
 		orders.clear();
 		clearAll();
 		std::string fileName = inboxFileName.get_string();
-		std::ifstream fileInputStream(fileName.c_str());
+		std::ifstream fileInputStream(fileName);
 		if (!fileInputStream)
 		{
 			outboxMessages.put("Can't open file " + fileName);
@@ -142,7 +142,7 @@ private:
 	{
 		inboxClientName.show();
 		std::string fileName = inboxFileName.get_string();
-		std::ifstream fileInputStream(fileName.c_str());
+		std::ifstream fileInputStream(fileName);
 		if (!fileInputStream)
 		{
 			outboxMessages.put("Can't open file " + fileName);
@@ -237,7 +237,7 @@ private:
 		orders.clear();
 		clearAll();
 		std::string fileName = inboxFileName.get_string();
-		std::ifstream fileInputStream(fileName.c_str());
+		std::ifstream fileInputStream(fileName);
 		if (!fileInputStream)
 		{
 			outboxMessages.put("Can't open file " + fileName);

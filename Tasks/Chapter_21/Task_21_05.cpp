@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 
-template<typename In, typename T>
-bool myFind(In& first, In last, const T& val)
+template<typename Iterator, typename T>
+bool myFind(Iterator& first, Iterator last, const T& val)
 {
 	while (first != last)
 	{

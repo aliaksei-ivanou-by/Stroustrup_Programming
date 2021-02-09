@@ -5,15 +5,15 @@
 int main()
 try
 {
-	const std::string fileName{ "Task_21_08.txt" };
-	std::ifstream fileStream{ fileName };
-	if (!fileStream)
+	const std::string fileNameInput{ "Task_21_08.txt" };
+	std::ifstream inputFileStream{ fileNameInput };
+	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't read file");
+		throw std::runtime_error("Can't read file" + fileNameInput);
 	}
 
 	std::map<std::string, int> words;
-	for (std::string i; fileStream >> i; )
+	for (std::string i; inputFileStream >> i; )
 	{
 		++words[i];
 	}
