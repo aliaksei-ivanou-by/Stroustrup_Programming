@@ -14,7 +14,7 @@ int main()
 	ch2 = (char*)malloc(sizeof(char) * (strlen(ch1) + 1));
 	if (!ch2)
 	{
-		perror("Can't allocate memory");
+		perror("Can't allocate memory\n");
 	}
 	ch2 = my_strcpy(ch2, ch1);
 	printf("ch1: %s, ch2: %s", ch1, ch2);

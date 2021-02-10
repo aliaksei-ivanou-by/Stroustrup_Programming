@@ -9,7 +9,7 @@ char* cat(const char* id, const char* addr)
 	res = (char*)malloc(sz);
 	if (!res)
 	{
-		perror("Can't allocate memory");
+		perror("Can't allocate memory\n");
 	}
 	strcpy(res, id);
 	res[idLength] = '@'; /* NOT idLength + 1 */

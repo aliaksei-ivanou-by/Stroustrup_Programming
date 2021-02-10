@@ -57,7 +57,6 @@ void list_move_left(struct List* lst, int i)
 		lst->links[i - 1] = lst->links[i];
 		--(lst->links[i - 1].prev);
 		--(lst->links[i - 1].next);
-		//lst->links[i - 1].next = lst->links[i].next;
 		++i;
 	}
 	lst->links[i - 2].next = -1;
