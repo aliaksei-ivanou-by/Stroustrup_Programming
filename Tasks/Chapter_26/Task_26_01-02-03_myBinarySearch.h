@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-template<typename Iter, typename T>
-bool myBinarySearch(Iter first, Iter last, const T& val)
+template<typename Iterator, typename T>
+bool myBinarySearch(Iterator first, Iterator last, const T& val)
 {
 	if (first == last)
 	{
@@ -13,8 +13,8 @@ bool myBinarySearch(Iter first, Iter last, const T& val)
 	{
 		return false;
 	}
-	Iter low = first;
-	Iter high = last;
+	Iterator low = first;
+	Iterator high = last;
 	while (true)
 	{
 		if (low == high)
@@ -22,15 +22,15 @@ bool myBinarySearch(Iter first, Iter last, const T& val)
 			return false;
 		}
 		int distance = 0;
-		Iter f = low;
+		Iterator f = low;
 		while (f != high)
 		{
 			++f;
 			++distance;
 		}
-		Iter lowTemp = low;
+		Iterator lowTemp = low;
 		std::advance(lowTemp, distance / 2);
-		Iter mid = lowTemp;
+		Iterator mid = lowTemp;
 		T guess = *mid;
 		if (guess == val)
 		{
@@ -59,8 +59,8 @@ struct CmpLess
 	}
 };
 
-template<typename Iter, typename T, typename Compare>
-bool myBinarySearch(Iter first, Iter last, const T& val, Compare cmp)
+template<typename Iterator, typename T, typename Compare>
+bool myBinarySearch(Iterator first, Iterator last, const T& val, Compare cmp)
 {
 	if (first == last)
 	{
@@ -70,8 +70,8 @@ bool myBinarySearch(Iter first, Iter last, const T& val, Compare cmp)
 	{
 		return false;
 	}
-	Iter low = first;
-	Iter high = last;
+	Iterator low = first;
+	Iterator high = last;
 	while (true)
 	{
 		if (low == high)
@@ -79,15 +79,15 @@ bool myBinarySearch(Iter first, Iter last, const T& val, Compare cmp)
 			return false;
 		}
 		int distance = 0;
-		Iter f = low;
+		Iterator f = low;
 		while (f != high)
 		{
 			++f;
 			++distance;
 		}
-		Iter lowTemp = low;
+		Iterator lowTemp = low;
 		std::advance(lowTemp, distance / 2);
-		Iter mid = lowTemp;
+		Iterator mid = lowTemp;
 		T guess = *mid;
 		if (!cmp(guess, val) && !cmp(val, guess))
 		{

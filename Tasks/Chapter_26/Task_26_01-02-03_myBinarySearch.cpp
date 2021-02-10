@@ -12,7 +12,7 @@ try
 		std::ifstream inputFileStream{ fileName };
 		if (!inputFileStream)
 		{
-			throw std::runtime_error("Can't open file");
+			throw std::runtime_error("Can't open file " + fileName);
 		}
 		unsigned int errors = test<int>(inputFileStream);
 		std::cout << "Errors: " << errors << '\n';
@@ -25,7 +25,7 @@ try
 			std::ifstream inputFileStream{ fileName };
 			if (!inputFileStream)
 			{
-				throw std::runtime_error("Can't open file");
+				throw std::runtime_error("Can't open file " + fileName);
 			}
 			unsigned int errors = test<double>(inputFileStream);
 			std::cout << "Errors: " << errors << '\n';
@@ -36,7 +36,7 @@ try
 			std::ifstream inputFileStream{ fileName };
 			if (!inputFileStream)
 			{
-				throw std::runtime_error("Can't open file");
+				throw std::runtime_error("Can't open file " + fileName);
 			}
 			unsigned int errors = test<double>(inputFileStream);
 			std::cout << "Errors: " << errors << '\n';
@@ -50,7 +50,7 @@ try
 			std::ifstream inputFileStream{ fileName };
 			if (!inputFileStream)
 			{
-				throw std::runtime_error("Can't open file");
+				throw std::runtime_error("Can't open file " + fileName);
 			}
 			unsigned int errors = test<int>(inputFileStream);
 			std::cout << "Errors: " << errors << '\n';
@@ -61,7 +61,7 @@ try
 			std::ifstream inputFileStream{ fileName };
 			if (!inputFileStream)
 			{
-				throw std::runtime_error("Can't open file");
+				throw std::runtime_error("Can't open file " + fileName);
 			}
 			unsigned int errors = test<double>(inputFileStream);
 			std::cout << "Errors: " << errors << '\n';
@@ -72,7 +72,7 @@ try
 			std::ifstream inputFileStream{ fileName };
 			if (!inputFileStream)
 			{
-				throw std::runtime_error("Can't open file");
+				throw std::runtime_error("Can't open file " + fileName);
 			}
 			unsigned int errors = test<double>(inputFileStream);
 			std::cout << "Errors: " << errors << '\n';
