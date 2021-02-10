@@ -27,10 +27,11 @@ T from_string(const std::string& s)
 int main()
 try
 {
-	std::ifstream inputFileStream{ "Task_23_09.txt" };
+	std::string fileName = "Task_23_09.txt";
+	std::ifstream inputFileStream{ fileName };
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file " + fileName);
 	}
 	
 	std::string line;

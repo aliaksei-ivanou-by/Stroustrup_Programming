@@ -29,7 +29,7 @@ try
 	std::ifstream inputFileStream{ fileName };
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file " + fileName);
 	}
 
 	int lineno = 0;

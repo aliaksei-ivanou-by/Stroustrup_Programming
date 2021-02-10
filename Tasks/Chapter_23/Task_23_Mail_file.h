@@ -82,12 +82,12 @@ bool find_subject(const Message* m, std::string& subject)
 	return false;
 }
 
-bool find_from_addr(const Message* m, std::string& s)
+bool find_from_addr(const Message* m, std::string& subject)
 {
 	for (Line_iter p = m->begin(); p != m->end(); ++p)
 	{
 		int n = 0;
-		if (is_prefix(*p, "From: ", s))
+		if (is_prefix(*p, "From: ", subject))
 		{
 			return true;
 		}
@@ -104,15 +104,15 @@ private:
 public:
 	Mail_file(const std::string& fileName)
 	{
-		std::ifstream in(fileName);
-		if (!in)
+		std::ifstream inputFileStream(fileName);
+		if (!inputFileStream)
 		{
 			std::cerr << "No file\n";
 			exit(1);
 		}
-		for (std::string s; getline(in, s); )
+		for (std::string subject; getline(inputFileStream, subject); )
 		{
-			lines.push_back(s);
+			lines.push_back(subject);
 		}
 		auto first = lines.begin();
 		for (auto p = lines.begin(); p != lines.end(); ++p)

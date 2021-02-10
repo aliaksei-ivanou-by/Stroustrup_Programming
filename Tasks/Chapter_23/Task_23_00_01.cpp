@@ -9,22 +9,22 @@
 int main()
 try
 {
-	Mail_file mfile{ "Task_23_00_01.txt" };
+	Mail_file mailFile{ "Task_23_00_01.txt" };
 
 	std::multimap<std::string, const Message*> sender;
 
-	for (const auto& m : mfile)
+	for (const auto& i : mailFile)
 	{
-		std::string s;
-		if (find_from_addr(&m, s))
+		std::string subject;
+		if (find_from_addr(&i, subject))
 		{
-			sender.insert(std::make_pair(s, &m));
+			sender.insert(std::make_pair(subject, &i));
 		}
 	}
-	auto pp = sender.equal_range("John Doe <jdoe@machine.example>");
-	for (auto p = pp.first; p != pp.second; ++p)
+	auto p = sender.equal_range("John Doe <jdoe@machine.example>");
+	for (auto i = p.first; i != p.second; ++i)
 	{
-		std::cout << find_subject(p->second) << '\n';
+		std::cout << find_subject(i->second) << '\n';
 	}
 }
 catch (const std::exception& e)

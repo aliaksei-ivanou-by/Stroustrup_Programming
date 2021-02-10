@@ -42,13 +42,9 @@ void dataMerge(
 	std::ifstream inputFileStream{ fileNameInput };
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file " + fileNameInput);
 	}
 	std::ofstream outputFileStream{ fileNameOutput };
-	if (!outputFileStream)
-	{
-		throw std::runtime_error("Can't open file");
-	}
 
 	std::regex regexHeader{ "^[KLASSE\\s]+(\\t[\\w\\s]+)*$" };
 	std::regex regexRow{ "^[\\w\\s]+(\\t[\\d]+)(\\t[\\d]+)(\\t[\\d]+)$" };

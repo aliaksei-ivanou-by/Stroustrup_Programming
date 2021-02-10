@@ -83,7 +83,7 @@ try
 	std::ifstream inputFileStream{ fileName1 };
 	if (!inputFileStream)
 	{
-		throw std::runtime_error("Can't read file");
+		throw std::runtime_error("Can't read file " + fileName1);
 	}
 
 	// find dates
