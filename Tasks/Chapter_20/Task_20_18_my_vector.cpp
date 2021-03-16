@@ -33,7 +33,10 @@ public:
 	}
 	~my_vector()
 	{
-		delete[] elem;
+		if (elem)
+		{
+			delete[] elem;
+		}
 	}
 	T& operator[](int n)
 	{
